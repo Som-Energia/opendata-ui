@@ -1,0 +1,14 @@
+{
+  "OPEN_DATA_API": "API Dades Obertes",
+  "RESPONSE_TYPE": "Tipus de resposta",
+  "DATA": "Dades",
+  "MAP": "Mapa",
+  "METRICA": "Mètrica",
+  "RELATIVE": "Relatiu a [per]",
+  "GEO_LEVEL": "Nivell goegràfic [by]",
+  "AXIS_TIME": "Eix temporal",
+  "LANGUAGE": "",
+  "TO_DATE": "A data [on]",
+  "GEO_FILTERS": "Filtres geogràfics",
+  "SEARCH": "Consulta"
+}
