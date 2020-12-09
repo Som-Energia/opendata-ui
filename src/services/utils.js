@@ -3,15 +3,43 @@ import { requestOpenApi } from './api'
 export const uriBase = 'https://opendata.somenergia.coop/v0.2'
 
 export const apiGeoLevels = []
+export const allLocations = []
 
-export const loadGeoLevels = () => {
+const loadGeoLevels = () => {
   requestOpenApi(uriBase+'/discover/geolevel')
     .then(yamldata => {
       const data = yaml.load(yamldata)
-      console.log(yamldata)
       apiGeoLevels.length=0
       apiGeoLevels.push(...data.geolevels)
+      loadAllLocations()
     })
+}
+
+const loadAllLocations = () => {
+  allLocations.length=0;
+  Promise.all(apiGeoLevels.map(geolevel => {
+    if (geolevel.id === 'world') { return true; }
+    if (geolevel.id === 'country') { return true; }
+    return requestOpenApi(uriBase+`/discover/geolevel/${geolevel.id}`)
+      .then(yamldata => {
+        const data = yaml.load(yamldata)
+
+        for (const [id, text] of Object.entries(data.options)) {
+          allLocations.push({
+            id,
+            text,
+            level: geolevel,
+            filterText: `${text} (${geolevel.text})`,
+            filterQuery: `${geolevel.id}=${id}`,
+            key: id,
+          })
+        }
+      })
+    })
+  ).then( data => {
+    console.log("allLocations", allLocations)
+    return data
+  })
 }
 
 loadGeoLevels()

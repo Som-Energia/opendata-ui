@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
 
 import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControl from '@material-ui/core/FormControl'
@@ -15,6 +16,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Select from '@material-ui/core/Select'
+import Autocomplete from '@material-ui/lab/Autocomplete'
 
 import { DatePicker } from "@material-ui/pickers"
 
@@ -23,7 +25,8 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import SearchIcon from '@material-ui/icons/Search'
 
-import { apiGeoLevels } from '../services/utils'
+import { apiGeoLevels, allLocations } from '../services/utils'
+import LocationFilter from './LocationFilter'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -248,13 +251,21 @@ const Filters = (props) => {
       }
 
       <FormControl fullWidth className={classes.formControl} variant="outlined">
-        <InputLabel htmlFor="geo-filters">{ t('GEO_FILTERS') }</InputLabel>
-        <OutlinedInput
-          id="geo-filters"
-          value=""
-          onChange=""
-          startAdornment={<InputAdornment position="start"><FilterListIcon className={classes.inputIcon} /></InputAdornment>}
-          label={ t('GEO_FILTERS') }
+        <Autocomplete
+          multiple
+          id="geo-filters-nou"
+          options={ allLocations || [] }
+          getOptionLabel={ (option) => `${option.text} (`+ t(`${option.level.id.toUpperCase()}`)+`)` }
+          groupBy= {(option) => t(`${option.level.id.toUpperCase()}`) }
+          defaultValue={[]}
+          filterSelectedOptions
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant="outlined"
+              label={ t('GEO_FILTERS') }
+            />
+          )}
         />
       </FormControl>
 
