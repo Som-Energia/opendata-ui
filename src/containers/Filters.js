@@ -23,7 +23,7 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import SearchIcon from '@material-ui/icons/Search'
 
-import { geoLevels } from '../services/utils'
+import { apiGeoLevels } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -136,12 +136,17 @@ const Filters = (props) => {
           label={ t('GEO_LEVEL') }
           fullWidth
         >
-          <MenuItem value="">{ t('GLOBAL') }</MenuItem>
           {
-            geoLevels &&
-              geoLevels.map( level => (
-                <MenuItem value={level}>{ t(`${level.toUpperCase()}`) }</MenuItem>
-              ))
+            apiGeoLevels.map( level => (
+              <MenuItem
+                value={level.id}
+                disabled={
+                  (options?.responseType === 'map' && level.mapable === false) ||
+                  (options?.responseType !== 'map' && level.detailed === false)
+                }
+              >{ t(`${level.id.toUpperCase()}`) }</MenuItem>
+              // TODO: when API had all translations use level.text instead uppercased id
+            ))
           }
         </Select>
         <FormHelperText>

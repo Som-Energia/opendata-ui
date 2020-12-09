@@ -1,4 +1,20 @@
+import yaml from 'js-yaml'
+import { requestOpenApi } from './api'
 export const uriBase = 'https://opendata.somenergia.coop/v0.2'
+
+export const apiGeoLevels = []
+
+export const loadGeoLevels = () => {
+  requestOpenApi(uriBase+'/discover/geolevel')
+    .then(yamldata => {
+      const data = yaml.load(yamldata)
+      console.log(yamldata)
+      apiGeoLevels.length=0
+      apiGeoLevels.push(...data.geolevels)
+    })
+}
+
+loadGeoLevels()
 
 export const geoLevels = [
   'country', 'ccaa', 'state', 'city'
@@ -34,7 +50,7 @@ export const urlFromOptions = (options) => {
     url += `/per/${relative}`
   }
 
-  if(geoLevel !== undefined && geoLevel ){
+  if(geoLevel !== undefined && geoLevel && geoLevel !== 'world'){
     url += `/by/${geoLevel}`
   }
 
