@@ -106,7 +106,7 @@ function App() {
 
   const initialValues = {
     responseType: 'data',
-    metric: 'members'
+    metric: 'members',
   }
 
   const [format, setFormat] = useState(0)
