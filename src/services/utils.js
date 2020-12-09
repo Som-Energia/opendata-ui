@@ -38,5 +38,26 @@ export const urlFromOptions = (options) => {
     url += `/by/${geoLevel}`
   }
 
+  switch (time) {
+    case 'monthly':
+    case 'yearly':
+    case 'weekly': {
+      console.log("periodic")
+      url += `/${time}`
+      if (fromDate) {
+        url += `/from/${fromDate.toISOString().substring(0, 8)}01`
+      }
+      if (toDate) {
+        url += `/to/${toDate.toISOString().substring(0, 8)}01}`
+      }
+      break;
+    }
+    default: {
+      if (onDate) {
+        url += `/on/${onDate.toISOString().substring(0, 8)}01`
+      }
+    }
+  }
+
   return url
 }
