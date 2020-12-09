@@ -249,27 +249,29 @@ const Filters = (props) => {
           </FormControl>
         </>
       }
-
-      <FormControl fullWidth className={classes.formControl} variant="outlined">
-        <Autocomplete
-          multiple
-          id="geo-filters-nou"
-          options={ allLocations || [] }
-          // TODO: Use API translated test for level text
-          getOptionLabel={ (option) => `${option.text} (`+ t(`${option.level.id.toUpperCase()}`)+`)` }
-          groupBy= {(option) => t(`${option.level.id.toUpperCase()}`) }
-          defaultValue={[]}
-          filterSelectedOptions
-          onChange={ (ev, value) => { setOptions({ ...options, geoFilters: value}) }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="outlined"
-              label={ t('GEO_FILTERS') }
-            />
-          )}
-        />
-      </FormControl>
+      {
+        options?.responseType !== 'map' &&
+        <FormControl fullWidth className={classes.formControl} variant="outlined">
+          <Autocomplete
+            multiple
+            id="geo-filters-nou"
+            options={ allLocations || [] }
+            // TODO: Use API translated test for level text
+            getOptionLabel={ (option) => `${option.text} (`+ t(`${option.level.id.toUpperCase()}`)+`)` }
+            groupBy= {(option) => t(`${option.level.id.toUpperCase()}`) }
+            defaultValue={[]}
+            filterSelectedOptions
+            onChange={ (ev, value) => { setOptions({ ...options, geoFilters: value}) }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="outlined"
+                label={ t('GEO_FILTERS') }
+              />
+            )}
+          />
+        </FormControl>
+      }
 
       <Button
         variant="contained"

@@ -103,8 +103,16 @@ export const urlFromOptions = (options) => {
       }
     }
   }
-  if (geoFilters && geoFilters.length) {
-    url += '?' + geoFilters.map(filter => filter.filterQuery).join('&')
+  let queryParams = []
+
+  if (responseType !== 'map') {
+    if (geoFilters && geoFilters.length) {
+      queryParams.push(...geoFilters.map(filter => filter.filterQuery))
+    }
+  }
+
+  if (queryParams.length) {
+    url += '?' + queryParams.join('&')
   }
 
   return url
