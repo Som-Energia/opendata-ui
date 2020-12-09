@@ -8,9 +8,9 @@ const Json = (props) => {
   const dataObj = jsyaml.load(data)
 
   return (
-    <div>
+    <pre>
       { JSON.stringify(dataObj, null, 2) }
-    </div>
+    </pre>
   )
 }
 

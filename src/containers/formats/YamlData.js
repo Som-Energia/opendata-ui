@@ -6,9 +6,9 @@ const Yaml = (props) => {
   const { data } = props
 
   return (
-    <div>
-      { jsyaml.dump(data) }
-    </div>
+    <pre>
+{ data }
+    </pre>
   )
 }
 
