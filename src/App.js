@@ -208,6 +208,10 @@ function App() {
 
               <Grid item xs={12} sm={8}>
 
+                <Paper className={classes.paper}>
+                  <Uri options={filterOptions} />
+                </Paper>
+
               <Paper className={classes.paperTabs}>
                   <Tabs
                     value={format}
@@ -226,10 +230,6 @@ function App() {
                   response &&
                     responseWithFormat(response, format)
                 }
-
-                <Paper className={classes.paper}>
-                  <Uri options={filterOptions} />
-                </Paper>
 
               </Grid>
             </Grid>
