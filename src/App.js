@@ -212,7 +212,7 @@ function App() {
                   <Uri options={filterOptions} />
                 </Paper>
 
-              <Paper className={classes.paperTabs}>
+                <Paper className={classes.paperTabs}>
                   <Tabs
                     value={format}
                     onChange={handleChange}
