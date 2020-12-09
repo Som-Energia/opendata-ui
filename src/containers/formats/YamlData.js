@@ -1,14 +1,15 @@
 import React from 'react'
 
-import jsyaml from 'js-yaml'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { materialLight as theme } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Yaml = (props) => {
   const { data } = props
 
   return (
-    <pre>
-{ data }
-    </pre>
+    <SyntaxHighlighter language="yaml" style={theme}>
+      {data}
+    </SyntaxHighlighter>
   )
 }
 
