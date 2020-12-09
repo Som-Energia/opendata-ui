@@ -62,6 +62,7 @@ export const urlFromOptions = (options) => {
     onDate,
     fromDate,
     toDate,
+    geoFilters,
   } = options
 
   let url = `${uriBase}`
@@ -101,6 +102,9 @@ export const urlFromOptions = (options) => {
         url += `/on/${onDate.toISOString().substring(0, 8)}01`
       }
     }
+  }
+  if (geoFilters && geoFilters.length) {
+    url += '?' + geoFilters.map(filter => filter.filterQuery).join('&')
   }
 
   return url

@@ -57,7 +57,8 @@ const defaultValues = {
   time: 'on',
   onDate: null,
   fromDate: null,
-  toDate: null
+  toDate: null,
+  geoFilters: []
 }
 
 const Filters = (props) => {
@@ -254,10 +255,12 @@ const Filters = (props) => {
           multiple
           id="geo-filters-nou"
           options={ allLocations || [] }
+          // TODO: Use API translated test for level text
           getOptionLabel={ (option) => `${option.text} (`+ t(`${option.level.id.toUpperCase()}`)+`)` }
           groupBy= {(option) => t(`${option.level.id.toUpperCase()}`) }
           defaultValue={[]}
           filterSelectedOptions
+          onChange={ (ev, value) => { setOptions({ ...options, geoFilters: value}) }}
           renderInput={(params) => (
             <TextField
               {...params}
