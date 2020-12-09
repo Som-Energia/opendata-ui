@@ -12,6 +12,7 @@
   "CCAA": "Comunitat Autònoma",
   "STATE": "Província",
   "CITY": "Municipi",
+  "LOCALGROUP": "Grup Local",
   "AXIS_TIME": "Eix temporal",
   "SINGLE_DATE": "Data única",
   "YEARLY": "Anualment",
