@@ -1,5 +1,15 @@
 # Open Data UI
 
+Web UI to Som Energia Open Data API.
+
+<https://opendata.somenergia.coop>
+
+The API retrieves public information about the cooperative:
+Number of members, contracts, production, energy usage...
+This UI enables non programmers to make use of it
+besides letting programmers understand how to use it.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
