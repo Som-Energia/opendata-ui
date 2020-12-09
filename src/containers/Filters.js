@@ -26,7 +26,6 @@ import FilterListIcon from '@material-ui/icons/FilterList'
 import SearchIcon from '@material-ui/icons/Search'
 
 import { apiGeoLevels, allLocations } from '../services/utils'
-import LocationFilter from './LocationFilter'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
