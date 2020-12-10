@@ -145,6 +145,11 @@ function App() {
   }
 
   const responseWithFormat = (response, format) => {
+    if (response.substring(0,5) === 'blob:') {
+        return (
+          <img src={ response } />
+       )
+    }
     switch (format) {
       case 0:
         return <TableContainer component={Paper} className={classes.tablePaper}>
@@ -212,20 +217,22 @@ function App() {
                   <Uri options={filterOptions} />
                 </Paper>
 
-                <Paper className={classes.paperTabs}>
-                  <Tabs
-                    value={format}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    centered
-                  >
-                    <Tab label={ t('TABLE') } />
-                    <Tab label={ t('YAML') } />
-                    <Tab label={ t('JSON') } />
-                  </Tabs>
-                </Paper>
-
+                {
+                  (!response || response.substring(0,5) !== 'blob:') && 
+                  <Paper className={classes.paperTabs}>
+                    <Tabs
+                      value={format}
+                      onChange={handleChange}
+                      indicatorColor="primary"
+                      textColor="primary"
+                      centered
+                    >
+                      <Tab label={ t('TABLE') } />
+                      <Tab label={ t('YAML') } />
+                      <Tab label={ t('JSON') } />
+                    </Tabs>
+                  </Paper>
+                }
                 {
                   response &&
                     responseWithFormat(response, format)
