@@ -12,12 +12,14 @@
 - [x] Filter editor: Build url query
 - [x] Maps should hide filters
 - [x] Maps should show languages
+- [x] Maps should hide (or show different) tabs
+- [x] Display svg maps
+- [x] Display gif maps
 - [ ] Bug: api geolevels might be loaded later and select does not work
 - [ ] Bug: reset to a compatible geolevel when switching between map and data
 - [ ] Table: State and city unaligned
 - [ ] Big lists (many city or many dates) are not working
 - [ ] URI: highlight URL changes (reuse Mar TDD'ed code in webforms-mithril)
-- [ ] Maps should hide (or show different) tabs
 - [ ] Table: Make it foldable
 - [ ] Table: Color cells by relative increment on row value
 - [ ] Format: Download button for YAML and JSON
