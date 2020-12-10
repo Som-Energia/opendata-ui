@@ -58,7 +58,8 @@ const defaultValues = {
   onDate: null,
   fromDate: null,
   toDate: null,
-  geoFilters: []
+  geoFilters: [],
+  lang: '',
 }
 
 const Filters = (props) => {
@@ -270,6 +271,26 @@ const Filters = (props) => {
               />
             )}
           />
+        </FormControl>
+      }
+      {
+        options?.responseType === 'map' &&
+        <FormControl variant="outlined" className={classes.formControl}>
+          <InputLabel id="lang">{ t('LANGUAGE') }</InputLabel>
+          <Select
+            labelId="lang-label"
+            value={options?.lang}
+            placeholder = { t('BROWSER_LANGUAGE') }
+            onChange={ (event, child) => setOptions({ ...options, lang: d(event.target.value), child:d(child)}) }
+            label={ t('LANGUAGE') }
+            fullWidth
+          >
+            <MenuItem value="">{ t('BROWSER_LANGUAGE') }</MenuItem>
+            <MenuItem value="ca">{ t('CATALAN') }</MenuItem>
+            <MenuItem value="es">{ t('SPANISH') }</MenuItem>
+            <MenuItem value="eu">{ t('BASQUE') }</MenuItem>
+            <MenuItem value="gl">{ t('GALICIAN') }</MenuItem>
+          </Select>
         </FormControl>
       }
 

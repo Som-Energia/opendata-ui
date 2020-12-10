@@ -11,6 +11,8 @@
 - [x] Filter editor: Store filter state
 - [x] Filter editor: Build url query
 - [x] Maps should hide filters
+- [x] Maps should show languages
+- [ ] Bug: api geolevels might be loaded later and select does not work
 - [ ] Bug: reset to a compatible geolevel when switching between map and data
 - [ ] Table: State and city unaligned
 - [ ] Big lists (many city or many dates) are not working
@@ -20,6 +22,6 @@
 - [ ] Table: Color cells by relative increment on row value
 - [ ] Format: Download button for YAML and JSON
 - [ ] Format: Download button for Table (Use CSV)
-- [ ] Format: consider it a controlable feature and just display the one selected (depends on api)
+- [ ] Format: consider it a controlable feature and just display the one selected (requires changes on api)
 
 

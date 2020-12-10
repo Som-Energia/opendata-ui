@@ -1,4 +1,10 @@
 {
+  "LANGUAGE": "Idioma",
+  "CATALAN": "Català",
+  "SPANISH": "Espanyol",
+  "BASQUE": "Basc",
+  "GALICIAN": "Gallec",
+  "BROWSER_LANGUAGE": "Idioma del navegador",
   "OPEN_DATA_API": "API Dades Obertes",
   "ALPHA_DISCLAIMER": "Advertència: això és una versió alfa. Les xifres calculades per l'API encara no són exactament les reals.",
   "RESPONSE_TYPE": "Tipus de resposta",

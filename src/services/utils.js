@@ -63,6 +63,7 @@ export const urlFromOptions = (options) => {
     fromDate,
     toDate,
     geoFilters,
+    lang,
   } = options
 
   let url = `${uriBase}`
@@ -108,6 +109,11 @@ export const urlFromOptions = (options) => {
   if (responseType !== 'map') {
     if (geoFilters && geoFilters.length) {
       queryParams.push(...geoFilters.map(filter => filter.filterQuery))
+    }
+  }
+  else {
+    if (lang && lang !=='browser') {
+      queryParams.push(`lang=${lang}`)
     }
   }
 
