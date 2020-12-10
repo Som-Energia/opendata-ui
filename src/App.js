@@ -147,7 +147,7 @@ function App() {
   const responseWithFormat = (response, format) => {
     if (response.substring(0,5) === 'blob:') {
         return (
-          <img src={ response } />
+          <img alt={ t('RESULTING_MAP') } src={ response } />
        )
     }
     switch (format) {

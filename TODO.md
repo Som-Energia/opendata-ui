@@ -15,10 +15,12 @@
 - [x] Maps should hide (or show different) tabs
 - [x] Display svg maps
 - [x] Display gif maps
+- [ ] Metrics: Take list from api
+- [ ] Relative: Take list from api (requires changes on api)
 - [ ] Bug: api geolevels might be loaded later and select does not work
 - [ ] Bug: reset to a compatible geolevel when switching between map and data
 - [ ] Table: State and city unaligned
-- [ ] Big lists (many city or many dates) are not working
+- [ ] Table: Big lists (many city or many dates) are not working
 - [ ] URI: highlight URL changes (reuse Mar TDD'ed code in webforms-mithril)
 - [ ] Table: Make it foldable
 - [ ] Table: Color cells by relative increment on row value
