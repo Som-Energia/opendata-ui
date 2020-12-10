@@ -281,7 +281,7 @@ const Filters = (props) => {
             labelId="lang-label"
             value={options?.lang}
             placeholder = { t('BROWSER_LANGUAGE') }
-            onChange={ (event, child) => setOptions({ ...options, lang: d(event.target.value), child:d(child)}) }
+            onChange={ (event, child) => setOptions({ ...options, lang: event.target.value, child: child}) }
             label={ t('LANGUAGE') }
             fullWidth
           >
