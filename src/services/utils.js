@@ -76,7 +76,7 @@ export const urlFromOptions = (options) => {
     url += `/${metric}`
   }
 
-  if(responseType === 'map' && relative !== undefined && relative ){
+  if(responseType === 'map' && relative !== undefined && relative && relative !== 'absolute'){
     url += `/per/${relative}`
   }
 

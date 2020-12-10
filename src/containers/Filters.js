@@ -52,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
 const defaultValues = {
   responseType: null,
   metric: null,
-  relative: null,
-  geoLevel: null,
+  relative: 'absolute',
+  geoLevel: 'world',
   time: 'on',
   onDate: null,
   fromDate: null,
@@ -124,8 +124,10 @@ const Filters = (props) => {
             onChange={ (event) => setOptions({ ...options, relative: event.target.value}) }
             label={ t('RELATIVE') }
             fullWidth
+            displayEmpty
+            required
           >
-            <MenuItem value="">{ t('ABSOLUTE') }</MenuItem>
+            <MenuItem value="absolute">{ t('ABSOLUTE') }</MenuItem>
             <MenuItem value="population">{ t('POPULATION') }</MenuItem>
           </Select>
         </FormControl>
@@ -193,7 +195,6 @@ const Filters = (props) => {
             label={ t('ON_DATE') }
             format="DD/MM/YYYY"
             autoOk
-            clearable
             value={ options?.onDate}
             onChange={ (value) => { setOptions({ ...options, onDate: value}) }}
           />

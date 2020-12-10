@@ -12,6 +12,8 @@
   "MAP": "Mapa",
   "METRIC": "Mètrica",
   "RELATIVE": "Relatiu a [per]",
+  "ABSOLUTE": "Absolut",
+  "POPULATION": "Població",
   "GEO_LEVEL": "Nivell geogràfic [by]",
   "WORLD": "Global",
   "COUNTRY": "País",
