@@ -12,7 +12,6 @@ import IconButton from '@material-ui/core/IconButton'
 import InputLabel from '@material-ui/core/InputLabel'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import MenuItem from '@material-ui/core/MenuItem'
-import OutlinedInput from '@material-ui/core/OutlinedInput'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Select from '@material-ui/core/Select'
@@ -23,6 +22,7 @@ import { DatePicker } from "@material-ui/pickers"
 import ClearIcon from '@material-ui/icons/Clear'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import FilterListIcon from '@material-ui/icons/FilterList'
+import LanguageIcon from '@material-ui/icons/Language'
 import SearchIcon from '@material-ui/icons/Search'
 
 import { apiGeoLevels, allLocations } from '../services/utils'
@@ -59,7 +59,7 @@ const defaultValues = {
   fromDate: null,
   toDate: null,
   geoFilters: [],
-  lang: '',
+  lang: 'browser',
 }
 
 const Filters = (props) => {
@@ -78,7 +78,7 @@ const Filters = (props) => {
   useEffect( () => {
     onChangeOptions(options)
   },
-  [options])
+  [options, onChangeOptions])
 
   const handleClear = () => {
     setOptions({...defaultValues, ...initialValues})
@@ -269,6 +269,16 @@ const Filters = (props) => {
                 {...params}
                 variant="outlined"
                 label={ t('GEO_FILTERS') }
+                InputProps={{
+                  ...params.InputProps,
+                  startAdornment:
+                    <>
+                      <InputAdornment position="start">
+                        <FilterListIcon className={classes.inputIcon} />
+                      </InputAdornment>
+                      {params.InputProps.startAdornment}
+                    </>
+                }}
               />
             )}
           />
@@ -285,8 +295,13 @@ const Filters = (props) => {
             onChange={ (event, child) => setOptions({ ...options, lang: event.target.value, child: child}) }
             label={ t('LANGUAGE') }
             fullWidth
+            InputProps={{
+              startAdornment: <InputAdornment position="start">
+                <LanguageIcon className={classes.inputIcon} />
+              </InputAdornment>
+            }}
           >
-            <MenuItem value="">{ t('BROWSER_LANGUAGE') }</MenuItem>
+            <MenuItem value="browser">{ t('BROWSER_LANGUAGE') }</MenuItem>
             <MenuItem value="ca">{ t('CATALAN') }</MenuItem>
             <MenuItem value="es">{ t('SPANISH') }</MenuItem>
             <MenuItem value="eu">{ t('BASQUE') }</MenuItem>
