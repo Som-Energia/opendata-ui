@@ -209,13 +209,13 @@ function App() {
                     initialValues={{...initialValues}}
                   />
                 </Paper>
-              </Grid>
-
-              <Grid item xs={12} sm={8}>
-
                 <Paper className={classes.paper}>
                   <Uri options={filterOptions} />
                 </Paper>
+
+              </Grid>
+
+              <Grid item xs={12} sm={8}>
 
                 {
                   (!response || response.substring(0,5) !== 'blob:') && 
