@@ -25,7 +25,7 @@ import FilterListIcon from '@material-ui/icons/FilterList'
 import LanguageIcon from '@material-ui/icons/Language'
 import SearchIcon from '@material-ui/icons/Search'
 
-import { apiGeoLevels, allLocations } from '../services/utils'
+import { apiMetrics, apiGeoLevels, allLocations } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -109,8 +109,14 @@ const Filters = (props) => {
           label={ t('METRICA') }
           fullWidth
         >
-          <MenuItem value="members">{ t('MEMBERS') }</MenuItem>
-          <MenuItem value="contracts">{ t('CONTRACTS') }</MenuItem>
+        {
+          apiMetrics.map( metric => (
+            <MenuItem value={ metric?.id }>
+              {/* TODO: use metric.text when API provides translations */}
+              { t(`${ metric?.id.toUpperCase() }`) }
+            </MenuItem>
+          ))
+        }
         </Select>
       </FormControl>
 
@@ -145,13 +151,15 @@ const Filters = (props) => {
           {
             apiGeoLevels.map( level => (
               <MenuItem
-                value={level.id}
+                value={ level.id }
                 disabled={
                   (options?.responseType === 'map' && level.mapable === false) ||
                   (options?.responseType !== 'map' && level.detailed === false)
                 }
-              >{ t(`${level.id.toUpperCase()}`) }</MenuItem>
-              // TODO: when API had all translations use level.text instead uppercased id
+              >
+                {/* TODO: use metric.text when API provides translations */}
+                { t(`${level.id.toUpperCase()}`) }
+              </MenuItem>
             ))
           }
         </Select>

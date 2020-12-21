@@ -2,6 +2,7 @@ import yaml from 'js-yaml'
 import { requestOpenApi } from './api'
 export const uriBase = 'https://opendata.somenergia.coop/v0.2'
 
+export const apiMetrics = []
 export const apiGeoLevels = []
 export const allLocations = []
 
@@ -11,7 +12,18 @@ const loadGeoLevels = () => {
       const data = yaml.load(yamldata)
       apiGeoLevels.length=0
       apiGeoLevels.push(...data.geolevels)
+      // TODO: Update select box
       loadAllLocations()
+    })
+}
+
+const loadMetrics = () => {
+  requestOpenApi(uriBase+'/discover/metrics')
+    .then(yamldata => {
+      const data = yaml.load(yamldata)
+      apiMetrics.length=0
+      apiMetrics.push(...data.metrics)
+      // TODO: Update select box
     })
 }
 
@@ -42,6 +54,7 @@ const loadAllLocations = () => {
   })
 }
 
+loadMetrics()
 loadGeoLevels()
 
 export const geoLevels = [
