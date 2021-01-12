@@ -40,7 +40,7 @@ const TableData = (props) => {
 
     const children = pluralGeoLevels[level] && data[pluralGeoLevels[level]]
     const name = data.name || t('GLOBAL')
-    const ident = pluralGeoLevels.length - (level + 1)
+    const ident = pluralGeoLevels.length - (level -1)
 
     return <>
       <TableRow hover>
@@ -76,7 +76,7 @@ const TableData = (props) => {
     <Table className={classes.table} size="small" aria-label="response table">
       <TableHead>
         <TableRow>
-          <TableCell colSpan={geoLevels.length+1} align="center">{ t('CODE') }</TableCell>
+          <TableCell colSpan={geoLevels.length + 3} align="center">{ t('CODE') }</TableCell>
           <TableCell>{ t('NAME') }</TableCell>
           {
             dataObj?.dates &&
