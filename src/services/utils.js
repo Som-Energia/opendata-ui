@@ -2,40 +2,37 @@ import yaml from 'js-yaml'
 import { requestOpenApi } from './api'
 export const uriBase = 'https://opendata.somenergia.coop/v0.2'
 
-export const apiMetrics = []
-export const apiGeoLevels = []
-export const allLocations = []
-
-const loadGeoLevels = () => {
-  requestOpenApi(uriBase+'/discover/geolevel')
+export const loadGeoLevels = async () => {
+  const apiGeoLevels = []
+  return requestOpenApi(uriBase+'/discover/geolevel')
     .then(yamldata => {
       const data = yaml.load(yamldata)
-      apiGeoLevels.length=0
       apiGeoLevels.push(...data.geolevels)
+      return apiGeoLevels
       // TODO: Update select box
-      loadAllLocations()
+      // loadAllLocations()
     })
 }
 
-const loadMetrics = () => {
-  requestOpenApi(uriBase+'/discover/metrics')
+export const loadMetrics = async () => {
+  const apiMetrics = []
+  return requestOpenApi(uriBase+'/discover/metrics')
     .then(yamldata => {
       const data = yaml.load(yamldata)
-      apiMetrics.length=0
       apiMetrics.push(...data.metrics)
-      // TODO: Update select box
+      return apiMetrics
     })
 }
 
-const loadAllLocations = () => {
-  allLocations.length=0;
-  Promise.all(apiGeoLevels.map(geolevel => {
+export const loadAllLocations = async (geoLevels) => {
+  const allLocations = []
+  console.log(geoLevels)
+  Promise.all(geoLevels.map(geolevel => {
     if (geolevel.id === 'world') { return true; }
     if (geolevel.id === 'country') { return true; }
     return requestOpenApi(uriBase+`/discover/geolevel/${geolevel.id}`)
       .then(yamldata => {
         const data = yaml.load(yamldata)
-
         for (const [id, text] of Object.entries(data.options)) {
           allLocations.push({
             id,
@@ -50,12 +47,12 @@ const loadAllLocations = () => {
     })
   ).then( data => {
     console.log("allLocations", allLocations)
-    return data
+    return allLocations
   })
 }
 
-loadMetrics()
-loadGeoLevels()
+//loadMetrics()
+//loadGeoLevels()
 
 export const geoLevels = [
   'country', 'ccaa', 'state', 'city'

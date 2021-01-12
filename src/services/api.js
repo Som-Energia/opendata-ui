@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export const requestOpenApi = async (url) => {
-  console.log(url)
   if (url.includes('/map/') ) {
     return requestOpenApiImage(url)
   }
@@ -10,7 +9,6 @@ export const requestOpenApi = async (url) => {
     url: url,
   })
   .then(response => {
-    console.log(response)
     return response?.data
   })
 }

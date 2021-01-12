@@ -25,7 +25,7 @@ import FilterListIcon from '@material-ui/icons/FilterList'
 import LanguageIcon from '@material-ui/icons/Language'
 import SearchIcon from '@material-ui/icons/Search'
 
-import { apiMetrics, apiGeoLevels, allLocations } from '../services/utils'
+import { loadMetrics, loadGeoLevels, loadAllLocations } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -73,7 +73,29 @@ const Filters = (props) => {
     onClear = () => {}
   } = props
 
+  const [apiMetrics, setApiMetrics] = useState([])
+  const [apiGeoLevels, setGeoLevels] = useState([])
+  const [allLocations, setAllLocations] = useState([])
+
   const [options , setOptions] = useState({...defaultValues, ...initialValues})
+
+  useEffect(() => {
+    const loadFilters = async () => {
+      const metrics = await loadMetrics()
+      const geoLevels = await loadGeoLevels()
+      setApiMetrics(metrics)
+      setGeoLevels(geoLevels)
+    }
+    loadFilters()
+  }, [])
+
+  useEffect(() => {
+    const loadFilters = async () => {
+      const locations = await loadAllLocations(apiGeoLevels)
+      setAllLocations(locations)
+    }
+    loadFilters()
+  }, [apiGeoLevels])
 
   useEffect( () => {
     onChangeOptions(options)
