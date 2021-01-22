@@ -133,7 +133,7 @@ const Filters = (props) => {
         >
         {
           apiMetrics.map( metric => (
-            <MenuItem value={ metric?.id }>
+            <MenuItem key={metric?.id} value={ metric?.id }>
               {/* TODO: use metric.text when API provides translations */}
               { t(`${ metric?.id.toUpperCase() }`) }
             </MenuItem>
@@ -173,6 +173,7 @@ const Filters = (props) => {
           {
             apiGeoLevels.map( level => (
               <MenuItem
+                key={ level.id }
                 value={ level.id }
                 disabled={
                   (options?.responseType === 'map' && level.mapable === false) ||
@@ -291,7 +292,7 @@ const Filters = (props) => {
             // TODO: Use API translated test for level text
             getOptionLabel={ (option) => `${option.text} (`+ t(`${option.level.id.toUpperCase()}`)+`)` }
             groupBy= {(option) => t(`${option.level.id.toUpperCase()}`) }
-            defaultValue={[]}
+            // defaultValue={[]}
             filterSelectedOptions
             onChange={ (ev, value) => { setOptions({ ...options, geoFilters: value}) }}
             renderInput={(params) => (

@@ -9,8 +9,6 @@ export const loadGeoLevels = async () => {
       const data = yaml.load(yamldata)
       apiGeoLevels.push(...data.geolevels)
       return apiGeoLevels
-      // TODO: Update select box
-      // loadAllLocations()
     })
 }
 
@@ -26,8 +24,7 @@ export const loadMetrics = async () => {
 
 export const loadAllLocations = async (geoLevels) => {
   const allLocations = []
-  console.log(geoLevels)
-  Promise.all(geoLevels.map(geolevel => {
+  return Promise.all(geoLevels.map(geolevel => {
     if (geolevel.id === 'world') { return true; }
     if (geolevel.id === 'country') { return true; }
     return requestOpenApi(uriBase+`/discover/geolevel/${geolevel.id}`)
@@ -46,13 +43,9 @@ export const loadAllLocations = async (geoLevels) => {
       })
     })
   ).then( data => {
-    console.log("allLocations", allLocations)
     return allLocations
   })
 }
-
-//loadMetrics()
-//loadGeoLevels()
 
 export const geoLevels = [
   'country', 'ccaa', 'state', 'city'
@@ -98,19 +91,18 @@ export const urlFromOptions = (options) => {
     case 'monthly':
     case 'yearly':
     case 'weekly': {
-      console.log("periodic")
       url += `/${time}`
       if (fromDate) {
-        url += `/from/${fromDate.toISOString().substring(0, 8)}01`
+        url += `/from/${fromDate.year()}-${fromDate.month()+1}-01`
       }
       if (toDate) {
-        url += `/to/${toDate.toISOString().substring(0, 8)}01}`
+        url += `/to/${fromDate.year()}-${fromDate.month()+1}-01`
       }
       break;
     }
     default: {
       if (onDate) {
-        url += `/on/${onDate.toISOString().substring(0, 8)}01`
+        url += `/on/${onDate.year()}-${onDate.month()+1}-01`
       }
     }
   }

@@ -7,13 +7,10 @@ import moment from 'moment'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 
-import AddIcon from '@material-ui/icons/Add'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
 
 import { geoLevels, pluralGeoLevels } from '../../services/utils'
@@ -29,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const TableData = (props) => {
   const { data } = props
+  console.log("DATA: ", data)
 
   const { t } = useTranslation()
   const classes = useStyles()

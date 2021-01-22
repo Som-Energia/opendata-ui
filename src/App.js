@@ -120,7 +120,6 @@ function App() {
   }
 
   const handleChangeOptions = (options) => {
-    console.log(options)
     setFilterOptions(options)
   }
 
@@ -130,7 +129,6 @@ function App() {
     const url = urlFromOptions(filterOptions)
     await requestOpenApi(url)
       .then(response => {
-        console.log(response)
         setResponse(response)
       })
       .catch(error => {
@@ -218,7 +216,7 @@ function App() {
               <Grid item xs={12} sm={8}>
 
                 {
-                  (!response || response.substring(0,5) !== 'blob:') && 
+                  (!response || response.substring(0,5) !== 'blob:') &&
                   <Paper className={classes.paperTabs}>
                     <Tabs
                       value={format}
