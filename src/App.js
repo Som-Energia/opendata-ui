@@ -96,6 +96,9 @@ const useStyles = makeStyles((theme) => ({
   paperTabs: {
     marginBottom: theme.spacing(2),
     boxShadow: 'none'
+  },
+  map: {
+    width: '100%'
   }
 }))
 
@@ -129,10 +132,12 @@ function App() {
     const url = urlFromOptions(filterOptions)
     await requestOpenApi(url)
       .then(response => {
+        console.log('setresponse!')
         setResponse(response)
       })
       .catch(error => {
         console.log(error)
+        setResponse(false)
       })
 
     setSending(false)
@@ -143,11 +148,22 @@ function App() {
   }
 
   const responseWithFormat = (response, format) => {
-    if (response.substring(0,5) === 'blob:') {
-        return (
-          <img alt={ t('RESULTING_MAP') } src={ response } />
-       )
+    if (response === undefined) {
+      return <></>
     }
+
+    if (response === false) {
+      return (
+        <Alert severity="error">{ t('NO_DATA') }</Alert>
+      )
+    }
+
+    if (response.substring?.(0,5) === 'blob:') {
+      return (
+        <img className={classes.map} alt={ t('RESULTING_MAP') } src={response} />
+      )
+    }
+
     switch (format) {
       case 0:
         return <TableContainer component={Paper} className={classes.tablePaper}>
@@ -216,26 +232,24 @@ function App() {
               <Grid item xs={12} sm={8}>
 
                 {
-                  (!response || response.substring(0,5) !== 'blob:') &&
-                  <Paper className={classes.paperTabs}>
-                    <Tabs
-                      value={format}
-                      onChange={handleChange}
-                      indicatorColor="primary"
-                      textColor="primary"
-                      centered
-                    >
-                      <Tab label={ t('TABLE') } />
-                      <Tab label={ t('YAML') } />
-                      <Tab label={ t('JSON') } />
-                    </Tabs>
-                  </Paper>
+                  response && response.substring?.(0,5) !== 'blob:' &&
+                    <Paper className={classes.paperTabs}>
+                      <Tabs
+                        value={format}
+                        onChange={handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        centered
+                      >
+                        <Tab label={ t('TABLE') } />
+                        <Tab label={ t('YAML') } />
+                        <Tab label={ t('JSON') } />
+                      </Tabs>
+                    </Paper>
                 }
                 {
-                  response &&
-                    responseWithFormat(response, format)
+                  responseWithFormat(response, format)
                 }
-
               </Grid>
             </Grid>
           </div>

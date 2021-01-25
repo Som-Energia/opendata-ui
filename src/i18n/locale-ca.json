@@ -36,5 +36,6 @@
   "GEOLEVEL_HELP": "Fins a quin nivell de detall vols aprofundir? Per defecte, és només la suma global.",
   "TABLE": "Taula",
   "CODE": "Codi",
-  "NAME": "Nom"
+  "NAME": "Nom",
+  "NO_DATA": "No hi ha informació"
 }

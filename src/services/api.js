@@ -22,9 +22,4 @@ const requestOpenApiImage = (url) => {
   .then(response => {
     return URL.createObjectURL(response.data)
   })
-  .catch(error => {
-    console.log("Error downloading image", error)
-    return error
-  })
-
 }
