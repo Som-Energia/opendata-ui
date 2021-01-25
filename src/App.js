@@ -193,7 +193,7 @@ function App() {
                 { t('OPEN_DATA_API') }
               </Typography>
               <Link
-                href="/docs"
+                href="https://opendata.somenergia.coop/docs"
                 target="_blank"
                 title="API Documentation"
                 color="inherit"
