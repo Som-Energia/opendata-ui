@@ -93,16 +93,16 @@ export const urlFromOptions = (options) => {
     case 'weekly': {
       url += `/${time}`
       if (fromDate) {
-        url += `/from/${fromDate.year()}-${fromDate.month()+1}-01`
+        url += `/from/${fromDate.year()}-${fromDate.format('MM')}-01`
       }
       if (toDate) {
-        url += `/to/${fromDate.year()}-${fromDate.month()+1}-01`
+        url += `/to/${toDate.year()}-${toDate.format('MM')}-01`
       }
       break;
     }
     default: {
       if (onDate) {
-        url += `/on/${onDate.year()}-${onDate.month()+1}-01`
+        url += `/on/${onDate.year()}-${onDate.format('MM')}-01`
       }
     }
   }
