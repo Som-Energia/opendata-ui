@@ -134,8 +134,7 @@ const Filters = (props) => {
         {
           apiMetrics.map( metric => (
             <MenuItem key={metric?.id} value={ metric?.id }>
-              {/* TODO: use metric.text when API provides translations */}
-              { t(`${ metric?.id.toUpperCase() }`) }
+              { t(`${ metric.text }`) }
             </MenuItem>
           ))
         }
