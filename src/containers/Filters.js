@@ -253,6 +253,7 @@ const Filters = (props) => {
               autoOk
               value={ options?.fromDate }
               onChange={ (value) => { setOptions({ ...options, fromDate: value}) }}
+              maxDate={ options?.toDate ? options.toDate : false }
             />
           </FormControl>
 
@@ -276,7 +277,7 @@ const Filters = (props) => {
               autoOk
               value={ options?.toDate }
               onChange={ (value) => { setOptions({ ...options, toDate: value}) }}
-              minDate={ options?.toDate ? options.toDate : false }
+              minDate={ options?.fromDate ? options.fromDate : false }
             />
           </FormControl>
         </>
