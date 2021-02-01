@@ -31,11 +31,13 @@
   "TO_DATE": "Fins a [to]",
   "GEO_FILTERS": "Filtres geogràfics",
   "SEARCH": "Consulta",
+  "CLEAR": "Esborra",
   "MEMBERS": "Socies",
   "CONTRACTS": "Contractes",
   "GEOLEVEL_HELP": "Fins a quin nivell de detall vols aprofundir? Per defecte, és només la suma global.",
   "TABLE": "Taula",
   "CODE": "Codi",
   "NAME": "Nom",
-  "NO_DATA": "No hi ha informació"
+  "NO_DATA": "No hi ha informació",
+  "API_DOCUMENTATION": "Documentació de l'API"
 }

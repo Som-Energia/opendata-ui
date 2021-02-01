@@ -13,8 +13,11 @@ import AppBar from '@material-ui/core/AppBar'
 import Paper from '@material-ui/core/Paper'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Grid from '@material-ui/core/Grid'
+import IconButton from '@material-ui/core/IconButton'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import Link from '@material-ui/core/Link'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 import TableContainer from '@material-ui/core/TableContainer'
@@ -24,6 +27,8 @@ import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import BubbleChart from '@material-ui/icons/BubbleChart'
 
 import Filters from 'containers/Filters'
 import Uri from 'containers/Uri'
@@ -105,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
 
   const classes = useStyles()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const initialValues = {
     responseType: 'data',
@@ -117,6 +122,17 @@ function App() {
   const [sending, setSending] = useState()
   const [response, setResponse] = useState()
 
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   const handleChange = (event, newValue) => {
     event.preventDefault()
     setFormat(newValue)
@@ -127,24 +143,26 @@ function App() {
   }
 
   const handleSubmit = async (options) => {
-    console.log('submit!')
     setSending(true)
     const url = urlFromOptions(filterOptions)
     await requestOpenApi(url)
       .then(response => {
-        console.log('setresponse!')
         setResponse(response)
       })
       .catch(error => {
         console.log(error)
         setResponse(false)
       })
-
     setSending(false)
   }
 
   const handleClear = () => {
     setResponse()
+  }
+
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
   }
 
   const responseWithFormat = (response, format) => {
@@ -192,14 +210,38 @@ function App() {
                 <img className={classes.logo} alt="Cuca de Som Energia" src={cuca} />
                 { t('OPEN_DATA_API') }
               </Typography>
-              <Link
-                href="https://opendata.somenergia.coop/docs"
-                target="_blank"
-                title="API Documentation"
-                color="inherit"
+
+              <IconButton
+                aria-label="more"
+                aria-controls="long-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
               >
-                <HelpOutlineIcon />
-              </Link>
+                <MoreVertIcon />
+              </IconButton>
+
+              <Menu
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}
+                PaperProps={{
+                }}
+              >
+                <MenuItem onClick={ () => openInNewTab('https://opendata.somenergia.coop/docs') & handleClose() }>
+                  <ListItemIcon>
+                    <HelpOutlineIcon />
+                  </ListItemIcon>
+                  <Typography variant="inherit">{ t('API_DOCUMENTATION') }</Typography>
+                </MenuItem>
+                <MenuItem onClick={ () => openInNewTab('https://opendata.somenergia.coop/ui/gapminder.html') & handleClose() }>
+                  <ListItemIcon>
+                    <BubbleChart />
+                  </ListItemIcon>
+                  Gapminder
+                </MenuItem>
+              </Menu>
+
             </Toolbar>
             {
             sending &&
