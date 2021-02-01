@@ -93,19 +93,20 @@ export const urlFromOptions = (options) => {
     case 'weekly': {
       url += `/${time}`
       if (fromDate) {
-        url += `/from/${fromDate.format('YYYY-MM')}-01`
+        url += `/from/${fromDate.format('YYYY-MM-DD')}`
       }
       if (toDate) {
-        url += `/to/${toDate.format('YYYY-MM')}-01`
+        url += `/to/${toDate.format('YYYY-MM-DD')}`
       }
       break;
     }
     default: {
       if (onDate) {
-        url += `/on/${onDate.format('YYYY-MM')}-01`
+        url += `/on/${onDate.format('YYYY-MM-DD')}`
       }
     }
   }
+
   let queryParams = []
 
   if (responseType !== 'map') {
