@@ -234,7 +234,7 @@ function App() {
                   </ListItemIcon>
                   <Typography variant="inherit">{ t('API_DOCUMENTATION') }</Typography>
                 </MenuItem>
-                <MenuItem onClick={ () => openInNewTab('https://opendata.somenergia.coop/ui/gapminder.html') & handleClose() }>
+                <MenuItem onClick={ () => openInNewTab('https://opendata.somenergia.coop/ui/legacy/gapminder.html') & handleClose() }>
                   <ListItemIcon>
                     <BubbleChart />
                   </ListItemIcon>
@@ -264,8 +264,7 @@ function App() {
                     onChangeOptions={handleChangeOptions}
                     initialValues={{...initialValues}}
                   />
-                </Paper>
-                <Paper className={classes.paper}>
+
                   <Uri options={filterOptions} />
                 </Paper>
 
