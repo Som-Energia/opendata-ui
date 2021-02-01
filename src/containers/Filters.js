@@ -179,8 +179,7 @@ const Filters = (props) => {
                   (options?.responseType !== 'map' && level.detailed === false)
                 }
               >
-                {/* TODO: use metric.text when API provides translations */}
-                { t(`${level.id.toUpperCase()}`) }
+                { t(`${level.text}`) }
               </MenuItem>
             ))
           }
