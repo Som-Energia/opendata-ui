@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles'
+import yaml from 'js-yaml'
 
 import { useTranslation } from 'react-i18next'
 import './i18n/i18n.js'
@@ -29,13 +30,14 @@ import Alert from '@material-ui/lab/Alert'
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import BubbleChart from '@material-ui/icons/BubbleChart'
+import GetAppIcon from '@material-ui/icons/GetApp'
 
-import Filters from 'containers/Filters'
-import Uri from 'containers/Uri'
+import Filters from 'components/Filters'
+import Uri from 'components/Uri'
 
-import Table from 'containers/formats/TableData'
-import Json from 'containers/formats/JsonData'
-import Yaml from 'containers/formats/YamlData'
+import Table from 'components/formats/TableData'
+import Json from 'components/formats/JsonData'
+import Yaml from 'components/formats/YamlData'
 
 import { requestOpenApi } from './services/api'
 import { urlFromOptions } from './services/utils'
@@ -100,17 +102,22 @@ const useStyles = makeStyles((theme) => ({
   },
   paperTabs: {
     marginBottom: theme.spacing(2),
-    boxShadow: 'none'
+    boxShadow: 'none',
+    display: 'flex',
+    justifyContent: 'space-between'  
   },
   map: {
     width: '100%'
+  },
+  button: {
+    marginRight: theme.spacing(2)
   }
 }))
 
 function App() {
 
   const classes = useStyles()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const initialValues = {
     responseType: 'data',
@@ -142,7 +149,7 @@ function App() {
     setFilterOptions(options)
   }
 
-  const handleSubmit = async (options) => {
+  const handleSubmit = async () => {
     setSending(true)
     const url = urlFromOptions(filterOptions)
     await requestOpenApi(url)
@@ -160,12 +167,20 @@ function App() {
     setResponse()
   }
 
+  const handleDownload = () => {
+    console.log(`download data...`)
+    if(response){
+      const dataObj = yaml.load(response)
+      console.log(dataObj)
+    }
+  }
+
   const openInNewTab = (url) => {
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
     if (newWindow) newWindow.opener = null
   }
 
-  const responseWithFormat = (response, format) => {
+  const ResponseWithFormat = ({response, format}) => {
     if (response === undefined) {
       return <></>
     }
@@ -271,7 +286,6 @@ function App() {
               </Grid>
 
               <Grid item xs={12} sm={8}>
-
                 {
                   response && response.substring?.(0,5) !== 'blob:' &&
                     <Paper className={classes.paperTabs}>
@@ -280,17 +294,30 @@ function App() {
                         onChange={handleChange}
                         indicatorColor="primary"
                         textColor="primary"
-                        centered
+                        left
                       >
                         <Tab label={ t('TABLE') } />
                         <Tab label={ t('YAML') } />
                         <Tab label={ t('JSON') } />
                       </Tabs>
+
+                      {
+                        <IconButton
+                          size="small"
+                          className={classes.button}
+                          color="default"
+                          onClick={handleDownload}
+                        >                          
+                          <GetAppIcon />
+                        </IconButton>
+                      }
+
                     </Paper>
                 }
-                {
-                  responseWithFormat(response, format)
-                }
+                <ResponseWithFormat
+                  response={response}
+                  format={format}
+                />
               </Grid>
             </Grid>
           </div>

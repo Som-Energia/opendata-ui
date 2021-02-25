@@ -24,51 +24,52 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const Rows = ({data, level = 0, code = 0}) => {
+  const { t } = useTranslation()
+  const classes = useStyles()
+
+  if (data === undefined) return <></>
+
+  const children = pluralGeoLevels[level] && data[pluralGeoLevels[level]]
+  const name = data.name || t('GLOBAL')
+  const ident = pluralGeoLevels.length - (level -1)
+
+  return <>
+    <TableRow hover>
+      <TableCell colSpan={level + 1}></TableCell>
+      <TableCell>
+        <ArrowRightIcon className={classes.inputIcon} />
+      </TableCell>
+      <TableCell colSpan={ident}>
+        { code }
+      </TableCell>
+      <TableCell>
+        { name }
+      </TableCell>
+      {
+        data?.values &&
+          data.values.map((value) => (
+            <TableCell align="right">
+              { value }
+            </TableCell>
+          ))
+      }
+    </TableRow>
+    {
+      children &&
+        Object.keys(children).map(code => (
+          <Rows data={children[code]} level={level +1} code={code} />
+        ))
+    }
+  </>
+}
+
 const TableData = (props) => {
   const { data } = props
-  console.log("DATA: ", data)
-
   const { t } = useTranslation()
   const classes = useStyles()
 
   const dataObj = yaml.load(data)
-
-  const renderRows = (data, level, code, index) => {
-    if (data === undefined) return <></>
-
-    const children = pluralGeoLevels[level] && data[pluralGeoLevels[level]]
-    const name = data.name || t('GLOBAL')
-    const ident = pluralGeoLevels.length - (level -1)
-
-    return <>
-      <TableRow hover>
-        <TableCell colSpan={level + 1}></TableCell>
-        <TableCell>
-          <ArrowRightIcon className={classes.inputIcon} />
-        </TableCell>
-        <TableCell colSpan={ident}>
-          { code }
-        </TableCell>
-        <TableCell>
-          { name }
-        </TableCell>
-        {
-          data?.values &&
-            data.values.map((value) => (
-              <TableCell align="right">
-                { value }
-              </TableCell>
-            ))
-        }
-      </TableRow>
-      {
-        children &&
-          Object.keys(children).map((code, index) => (
-            renderRows(children[code], level + 1, code, index)
-          ))
-      }
-    </>
-  }
 
   return (
     <Table className={classes.table} size="small" aria-label="response table">
@@ -84,9 +85,7 @@ const TableData = (props) => {
           }
         </TableRow>
       </TableHead>
-      {
-        renderRows(dataObj, 0, 0, 0)
-      }
+      <Rows data={dataObj} />
     </Table>
   )
 }
