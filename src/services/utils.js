@@ -128,33 +128,66 @@ export const urlFromOptions = (options) => {
   return url
 }
 
-export const csvHeaders = (data) => {
-  const headers = []
+export const csvRowData = (data) => {
+  const rows = []
+  const rowGlobal = {}
 
-  data?.dates?.forEach((date, index) => {
+  data?.dates?.forEach((date, index) => {    
     const formatedDate = dayjs(date).format('DD/MM/YYYY')
-    headers.push({ label: formatedDate, key: `values[${index}]` })
+    const dateIndex = data.dates.length > 1 ? `date${index}` : 'dates'
+    const totalIndex = data.dates.length > 1 ? `total${index}` : 'total'
+    rowGlobal[dateIndex] = formatedDate
+    rowGlobal[totalIndex] = data.values[index]
   })
 
-  data?.countries &&
-  Object.keys(data.countries).forEach(countryCode => {
-    headers.push({ label: 'Country', key: `countries.${countryCode}.name` })
-    headers.push({ label: 'Country value', key: `countries.${countryCode}.values.0` })
-    data?.countries?.[countryCode]?.ccaas &&
-    Object.keys(data.countries[countryCode].ccaas).forEach(ccaaCode => {
-      headers.push({ label: 'Ccaa', key: `countries.${countryCode}.ccaas.${ccaaCode}.name` })
-      headers.push({ label: 'Ccaa value', key: `countries.${countryCode}.ccaas.${ccaaCode}.values.0` })
-      data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states &&
-      Object.keys(data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states).forEach(stateCode => {
-        headers.push({ label: 'State', key: `countries.${countryCode}.ccaas.${ccaaCode}.states.${stateCode}.name` })
-        headers.push({ label: 'State value', key: `countries.${countryCode}.ccaas.${ccaaCode}.states.${stateCode}.values.0` })
-        data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states?.[stateCode]?.cities &&
-        Object.keys(data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states?.[stateCode]?.cities).forEach(cityCode => {
-          headers.push({ label: 'City', key: `countries.${countryCode}.ccaas.${ccaaCode}.states.${stateCode}.cities.${cityCode}.name` })
-          headers.push({ label: 'City value', key: `countries.${countryCode}.ccaas.${ccaaCode}.states.${stateCode}.cities.${cityCode}.values.0` })
-        })            
-      })      
+  data?.countries
+  ? Object.keys(data.countries).forEach(countryCode => {
+    const rowCountry = { ...rowGlobal }
+    rowCountry.countryCode = countryCode
+    rowCountry.countryName = data.countries[countryCode].name
+    data?.dates?.forEach((date, index) => {    
+      const totalIndex = data.dates.length > 1 ? `countryTotal${index}` : 'countryTotal'
+      rowCountry[totalIndex] = data.countries[countryCode].values[index]
     })  
+
+    data?.countries?.[countryCode]?.ccaas
+    ? Object.keys(data.countries[countryCode].ccaas).forEach(ccaaCode => {
+      const rowCcaa = { ...rowCountry }
+      rowCcaa.ccaaCode = ccaaCode
+      rowCcaa.ccaaName = data.countries[countryCode].ccaas[ccaaCode].name
+      data?.dates?.forEach((date, index) => {    
+        const totalIndex = data.dates.length > 1 ? `ccaaTotal${index}` : 'ccaaTotal'
+        rowCcaa[totalIndex] = data.countries[countryCode].ccaas[ccaaCode].values[index]
+      })    
+
+      data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states
+      ? Object.keys(data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states).forEach(stateCode => {
+        const rowState = { ...rowCcaa }
+        rowState.stateCode = stateCode
+        rowState.stateName = data.countries[countryCode].ccaas[ccaaCode].states[stateCode].name
+        data?.dates?.forEach((date, index) => {    
+          const totalIndex = data.dates.length > 1 ? `stateTotal${index}` : 'stateTotal'
+          rowState[totalIndex] = data.countries[countryCode].ccaas[ccaaCode].states[stateCode].values[index]  
+        })    
+  
+        data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states?.[stateCode]?.cities
+        ? Object.keys(data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states?.[stateCode]?.cities).forEach(cityCode => {
+          const rowCity = { ...rowState }
+          rowCity.cityCode = cityCode
+          rowCity.cityName = data.countries[countryCode].ccaas[ccaaCode].states[stateCode].cities[cityCode].name
+          data?.dates?.forEach((date, index) => {    
+            const totalIndex = data.dates.length > 1 ? `cityTotal${index}` : 'cityTotal'
+            rowCity[totalIndex] = data.countries[countryCode].ccaas[ccaaCode].states[stateCode].cities[cityCode].values[index]
+          })      
+          rows.push(rowCity)
+        })
+        : rows.push(rowState)          
+      })
+      : rows.push(rowCcaa)      
+    })
+    : rows.push(rowCountry)
   })
-  return headers
+  : rows.push(rowGlobal)
+
+  return rows
 }

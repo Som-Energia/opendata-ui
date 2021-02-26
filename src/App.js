@@ -41,7 +41,7 @@ import Json from 'components/formats/JsonData'
 import Yaml from 'components/formats/YamlData'
 
 import { requestOpenApi } from './services/api'
-import { urlFromOptions, csvHeaders } from './services/utils'
+import { urlFromOptions, csvRowData } from './services/utils'
 
 import './App.css'
 import cuca from 'images/cuca.svg'
@@ -111,6 +111,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   button: {
+    display: 'flex',
     marginRight: theme.spacing(2)
   }
 }))
@@ -129,17 +130,15 @@ function App() {
   const [filterOptions, setFilterOptions] = useState(initialValues)
   const [sending, setSending] = useState()
   const [response, setResponse] = useState()
-  const [headers, setHeaders] = useState([])
+  const [rowData, setRowData] = useState([])
 
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
   useEffect(() => {
     const dataObj = yaml.load(response)
-    const headers = csvHeaders(dataObj)
-    console.log(dataObj)
-    console.log(headers)
-    setHeaders(headers)
+    const rows = csvRowData(dataObj)
+    setRowData(rows)
   }, [response])
 
   const handleClick = (event) => {
@@ -165,12 +164,13 @@ function App() {
     await requestOpenApi(url)
       .then(response => {
         setResponse(response)
+        setSending(false)
       })
       .catch(error => {
         console.log(error)
         setResponse(false)
+        setSending(false)
       })
-    setSending(false)
   }
 
   const handleClear = () => {
@@ -302,8 +302,8 @@ function App() {
                         <Tab label={ t('JSON') } />
                       </Tabs>
 
-                      <CSVLink data={response} headers={headers}>
-                      <IconButton
+                      <CSVLink className={classes.button} filename={`${filterOptions.metric}-${filterOptions.geoLevel}-${+ new Date()}.csv`} data={rowData}>
+                        <IconButton
                           size="small"
                           className={classes.button}
                           color="default"
