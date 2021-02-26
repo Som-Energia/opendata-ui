@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles'
 import yaml from 'js-yaml'
+import { CSVLink } from 'react-csv'
 
 import { useTranslation } from 'react-i18next'
 import './i18n/i18n.js'
@@ -40,7 +41,7 @@ import Json from 'components/formats/JsonData'
 import Yaml from 'components/formats/YamlData'
 
 import { requestOpenApi } from './services/api'
-import { urlFromOptions } from './services/utils'
+import { urlFromOptions, csvHeaders } from './services/utils'
 
 import './App.css'
 import cuca from 'images/cuca.svg'
@@ -128,9 +129,18 @@ function App() {
   const [filterOptions, setFilterOptions] = useState(initialValues)
   const [sending, setSending] = useState()
   const [response, setResponse] = useState()
+  const [headers, setHeaders] = useState([])
 
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
+
+  useEffect(() => {
+    const dataObj = yaml.load(response)
+    const headers = csvHeaders(dataObj)
+    console.log(dataObj)
+    console.log(headers)
+    setHeaders(headers)
+  }, [response])
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -165,14 +175,6 @@ function App() {
 
   const handleClear = () => {
     setResponse()
-  }
-
-  const handleDownload = () => {
-    console.log(`download data...`)
-    if(response){
-      const dataObj = yaml.load(response)
-      console.log(dataObj)
-    }
   }
 
   const openInNewTab = (url) => {
@@ -294,24 +296,21 @@ function App() {
                         onChange={handleChange}
                         indicatorColor="primary"
                         textColor="primary"
-                        left
                       >
                         <Tab label={ t('TABLE') } />
                         <Tab label={ t('YAML') } />
                         <Tab label={ t('JSON') } />
                       </Tabs>
 
-                      {
-                        <IconButton
+                      <CSVLink data={response} headers={headers}>
+                      <IconButton
                           size="small"
                           className={classes.button}
                           color="default"
-                          onClick={handleDownload}
                         >                          
                           <GetAppIcon />
                         </IconButton>
-                      }
-
+                      </CSVLink>
                     </Paper>
                 }
                 <ResponseWithFormat

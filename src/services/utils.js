@@ -1,4 +1,5 @@
 import yaml from 'js-yaml'
+import * as dayjs from 'dayjs'
 import { requestOpenApi } from './api'
 export const uriBase = 'https://opendata.somenergia.coop/v0.2'
 
@@ -125,4 +126,35 @@ export const urlFromOptions = (options) => {
   }
 
   return url
+}
+
+export const csvHeaders = (data) => {
+  const headers = []
+
+  data?.dates?.forEach((date, index) => {
+    const formatedDate = dayjs(date).format('DD/MM/YYYY')
+    headers.push({ label: formatedDate, key: `values[${index}]` })
+  })
+
+  data?.countries &&
+  Object.keys(data.countries).forEach(countryCode => {
+    headers.push({ label: 'Country', key: `countries.${countryCode}.name` })
+    headers.push({ label: 'Country value', key: `countries.${countryCode}.values.0` })
+    data?.countries?.[countryCode]?.ccaas &&
+    Object.keys(data.countries[countryCode].ccaas).forEach(ccaaCode => {
+      headers.push({ label: 'Ccaa', key: `countries.${countryCode}.ccaas.${ccaaCode}.name` })
+      headers.push({ label: 'Ccaa value', key: `countries.${countryCode}.ccaas.${ccaaCode}.values.0` })
+      data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states &&
+      Object.keys(data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states).forEach(stateCode => {
+        headers.push({ label: 'State', key: `countries.${countryCode}.ccaas.${ccaaCode}.states.${stateCode}.name` })
+        headers.push({ label: 'State value', key: `countries.${countryCode}.ccaas.${ccaaCode}.states.${stateCode}.values.0` })
+        data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states?.[stateCode]?.cities &&
+        Object.keys(data?.countries?.[countryCode]?.ccaas?.[ccaaCode]?.states?.[stateCode]?.cities).forEach(cityCode => {
+          headers.push({ label: 'City', key: `countries.${countryCode}.ccaas.${ccaaCode}.states.${stateCode}.cities.${cityCode}.name` })
+          headers.push({ label: 'City value', key: `countries.${countryCode}.ccaas.${ccaaCode}.states.${stateCode}.cities.${cityCode}.values.0` })
+        })            
+      })      
+    })  
+  })
+  return headers
 }
