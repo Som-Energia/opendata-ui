@@ -14,6 +14,7 @@ import TableRow from '@material-ui/core/TableRow'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
 
 import { geoLevels, pluralGeoLevels } from '../../services/utils'
+import { TableBody } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -48,8 +49,8 @@ const Rows = ({data, level = 0, code = 0}) => {
       </TableCell>
       {
         data?.values &&
-          data.values.map((value) => (
-            <TableCell align="right">
+          data.values.map((value, index) => (
+            <TableCell key={index} align="right">
               { value }
             </TableCell>
           ))
@@ -58,7 +59,7 @@ const Rows = ({data, level = 0, code = 0}) => {
     {
       children &&
         Object.keys(children).map(code => (
-          <Rows data={children[code]} level={level +1} code={code} />
+          <Rows key={code} data={children[code]} level={level +1} code={code} />
         ))
     }
   </>
@@ -85,7 +86,9 @@ const TableData = (props) => {
           }
         </TableRow>
       </TableHead>
-      <Rows data={dataObj} />
+      <TableBody>
+        <Rows data={dataObj} />
+      </TableBody>      
     </Table>
   )
 }

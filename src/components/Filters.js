@@ -64,7 +64,7 @@ const defaultValues = {
 
 const Filters = (props) => {
   const classes = useStyles()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const {
     initialValues = {},
@@ -322,7 +322,10 @@ const Filters = (props) => {
             labelId="lang-label"
             value={options?.lang}
             placeholder = { t('BROWSER_LANGUAGE') }
-            onChange={ (event, child) => setOptions({ ...options, lang: event.target.value, child: child}) }
+            onChange={ (event, child) => {               
+              setOptions({ ...options, lang: event.target.value, child: child})
+              i18n.changeLanguage(event.target.value)
+            }}
             label={ t('LANGUAGE') }
             fullWidth
             InputProps={{
