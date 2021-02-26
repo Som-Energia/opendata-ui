@@ -18,10 +18,17 @@ import { TableBody } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 650
+    minWidth: 650,
+    overflowX: 'scroll'
   },
   inputIcon: {
     color: '#757575'
+  },
+  noPadding: {
+    padding: 0
+  },
+  noPaddingRight: {
+    paddingRight: 0
   }
 }))
 
@@ -37,8 +44,8 @@ const Rows = ({data, level = 0, code = 0}) => {
 
   return <>
     <TableRow hover>
-      <TableCell colSpan={level + 1}></TableCell>
-      <TableCell>
+      <TableCell className={classes.noPadding} colSpan={level + 1}></TableCell>
+      <TableCell className={classes.noPaddingRight}>
         <ArrowRightIcon className={classes.inputIcon} />
       </TableCell>
       <TableCell colSpan={ident}>
