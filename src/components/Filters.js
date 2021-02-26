@@ -25,7 +25,7 @@ import FilterListIcon from '@material-ui/icons/FilterList'
 import LanguageIcon from '@material-ui/icons/Language'
 import SearchIcon from '@material-ui/icons/Search'
 
-import { loadMetrics, loadGeoLevels, loadAllLocations } from '../services/utils'
+import { loadMetrics, loadGeoLevels, loadAllLocations, languages } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -64,7 +64,7 @@ const defaultValues = {
 
 const Filters = (props) => {
   const classes = useStyles()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const {
     initialValues = {},
@@ -324,7 +324,6 @@ const Filters = (props) => {
             placeholder = { t('BROWSER_LANGUAGE') }
             onChange={ (event, child) => {               
               setOptions({ ...options, lang: event.target.value, child: child})
-              i18n.changeLanguage(event.target.value)
             }}
             label={ t('LANGUAGE') }
             fullWidth
@@ -335,10 +334,11 @@ const Filters = (props) => {
             }}
           >
             <MenuItem value="browser">{ t('BROWSER_LANGUAGE') }</MenuItem>
-            <MenuItem value="ca">{ t('CATALAN') }</MenuItem>
-            <MenuItem value="es">{ t('SPANISH') }</MenuItem>
-            <MenuItem value="eu">{ t('BASQUE') }</MenuItem>
-            <MenuItem value="gl">{ t('GALICIAN') }</MenuItem>
+            {
+              languages.map(({code, name}) => (
+                <MenuItem value={code}>{ t(name) }</MenuItem>
+              ))
+            }
           </Select>
         </FormControl>
       }

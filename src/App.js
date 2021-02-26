@@ -14,6 +14,7 @@ import MomentUtils from '@date-io/moment'
 import AppBar from '@material-ui/core/AppBar'
 import Paper from '@material-ui/core/Paper'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -41,7 +42,7 @@ import Json from 'components/formats/JsonData'
 import Yaml from 'components/formats/YamlData'
 
 import { requestOpenApi } from './services/api'
-import { urlFromOptions, csvRowData } from './services/utils'
+import { urlFromOptions, csvRowData, languages } from './services/utils'
 
 import './App.css'
 import cuca from 'images/cuca.svg'
@@ -119,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
 
   const classes = useStyles()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const initialValues = {
     responseType: 'data',
@@ -180,6 +181,10 @@ function App() {
   const openInNewTab = (url) => {
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
     if (newWindow) newWindow.opener = null
+  }
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng)
   }
 
   const ResponseWithFormat = ({response, format}) => {
@@ -257,6 +262,19 @@ function App() {
                   </ListItemIcon>
                   Gapminder
                 </MenuItem>
+                <Divider light />
+                {
+                  languages.map(({code, name}) => (
+                    <MenuItem 
+                      onClick={event => changeLanguage(code) & handleClose() }
+                      value={code}
+                    >
+                      <ListItemIcon>
+                      </ListItemIcon>
+                      { t(name) }
+                    </MenuItem>
+                  ))
+                }
               </Menu>
 
             </Toolbar>

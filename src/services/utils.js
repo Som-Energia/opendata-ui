@@ -56,6 +56,13 @@ export const pluralGeoLevels = [
   'countries', 'ccaas', 'states', 'cities'
 ]
 
+export const languages = [
+  { name:'CATALAN', code:'ca' },
+  { name:'SPANISH', code:'es' },
+  { name:'BASQUE', code:'eu' },
+  { name:'GALICIAN', code:'gl' }
+]
+
 export const urlFromOptions = (options) => {
   const {
     responseType,
