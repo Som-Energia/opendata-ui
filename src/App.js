@@ -167,14 +167,6 @@ function App() {
     setResponse()
   }
 
-  const handleDownload = () => {
-    console.log(`download data...`)
-    if(response){
-      const dataObj = yaml.load(response)
-      console.log(dataObj)
-    }
-  }
-
   const openInNewTab = (url) => {
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
     if (newWindow) newWindow.opener = null
@@ -300,17 +292,6 @@ function App() {
                         <Tab label={ t('YAML') } />
                         <Tab label={ t('JSON') } />
                       </Tabs>
-
-                      {
-                        <IconButton
-                          size="small"
-                          className={classes.button}
-                          color="default"
-                          onClick={handleDownload}
-                        >                          
-                          <GetAppIcon />
-                        </IconButton>
-                      }
 
                     </Paper>
                 }
