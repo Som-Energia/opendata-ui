@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
-import { createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles'
-import yaml from 'js-yaml'
-import { CSVLink } from 'react-csv'
+import { useState } from 'react'
+import {
+  createMuiTheme,
+  ThemeProvider,
+  makeStyles
+} from '@material-ui/core/styles'
 
 import { useTranslation } from 'react-i18next'
 import './i18n/i18n.js'
@@ -42,7 +44,7 @@ import Json from 'components/formats/JsonData'
 import Yaml from 'components/formats/YamlData'
 
 import { requestOpenApi } from './services/api'
-import { urlFromOptions, csvRowData, languages } from './services/utils'
+import { urlFromOptions, languages } from './services/utils'
 
 import './App.css'
 import cuca from 'images/cuca.svg'
@@ -74,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh'
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   title: {
     flexGrow: 1,
@@ -85,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     maxHeight: '36px',
     marginBottom: '4px',
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   container: {
     width: '100%',
@@ -106,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     boxShadow: 'none',
     display: 'flex',
-    justifyContent: 'space-between'  
+    justifyContent: 'space-between'
   },
   map: {
     width: '100%'
@@ -118,29 +120,21 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function App() {
-
   const classes = useStyles()
   const { t, i18n } = useTranslation()
 
   const initialValues = {
     responseType: 'data',
-    metric: 'members',
+    metric: 'members'
   }
 
   const [format, setFormat] = useState(0)
   const [filterOptions, setFilterOptions] = useState(initialValues)
   const [sending, setSending] = useState()
   const [response, setResponse] = useState()
-  const [rowData, setRowData] = useState([])
 
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
-
-  useEffect(() => {
-    const dataObj = yaml.load(response)
-    const rows = csvRowData(dataObj)
-    setRowData(rows)
-  }, [response])
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -163,15 +157,14 @@ function App() {
     setSending(true)
     const url = urlFromOptions(filterOptions)
     await requestOpenApi(url)
-      .then(response => {
+      .then((response) => {
         setResponse(response)
-        setSending(false)
       })
-      .catch(error => {
-        console.log(error)
+      .catch((error) => {
         setResponse(false)
-        setSending(false)
+        console.error(error)
       })
+    setSending(false)
   }
 
   const handleClear = () => {
@@ -183,62 +176,73 @@ function App() {
     if (newWindow) newWindow.opener = null
   }
 
-  const changeLanguage = lng => {
+  const downloadTSV = () => {
+    const url = urlFromOptions({ ...filterOptions, format: 'tsv' })
+    openInNewTab(url)
+  }
+
+  const changeLanguage = (lng) => {
     i18n.changeLanguage(lng)
   }
 
-  const ResponseWithFormat = ({response, format}) => {
+  const ResponseWithFormat = ({ response, format }) => {
     if (response === undefined) {
       return <></>
     }
 
     if (response === false) {
-      return (
-        <Alert severity="error">{ t('NO_DATA') }</Alert>
-      )
+      return <Alert severity="error">{t('NO_DATA')}</Alert>
     }
 
-    if (response.substring?.(0,5) === 'blob:') {
+    if (response.substring?.(0, 5) === 'blob:') {
       return (
-        <img className={classes.map} alt={ t('RESULTING_MAP') } src={response} />
+        <img className={classes.map} alt={t('RESULTING_MAP')} src={response} />
       )
     }
 
     switch (format) {
       case 0:
-        return <TableContainer component={Paper} className={classes.tablePaper}>
-          <Table data={response} />
-        </TableContainer>
+        return (
+          <TableContainer component={Paper} className={classes.tablePaper}>
+            <Table data={response} />
+          </TableContainer>
+        )
       case 2:
-        return <Paper className={classes.paper}>
-          <Json data={response} />
-        </Paper>
+        return (
+          <Paper className={classes.paper}>
+            <Json data={response} />
+          </Paper>
+        )
       default:
-        return <Paper className={classes.paper}>
-          <Yaml data={response} />
-        </Paper>
-      }
+        return (
+          <Paper className={classes.paper}>
+            <Yaml data={response} />
+          </Paper>
+        )
+    }
   }
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <MuiPickersUtilsProvider utils={MomentUtils}>
-
         <div className={classes.root}>
           <AppBar position="fixed" elevation={0} color="inherit">
             <Toolbar>
               <Typography variant="h6" className={classes.title}>
-                <img className={classes.logo} alt="Cuca de Som Energia" src={cuca} />
-                { t('OPEN_DATA_API') }
+                <img
+                  className={classes.logo}
+                  alt="Cuca de Som Energia"
+                  src={cuca}
+                />
+                {t('OPEN_DATA_API')}
               </Typography>
 
               <IconButton
                 aria-label="more"
                 aria-controls="long-menu"
                 aria-haspopup="true"
-                onClick={handleClick}
-              >
+                onClick={handleClick}>
                 <MoreVertIcon />
               </IconButton>
 
@@ -247,48 +251,48 @@ function App() {
                 keepMounted
                 open={open}
                 onClose={handleClose}
-                PaperProps={{
-                }}
-              >
-                <MenuItem onClick={ () => openInNewTab('https://opendata.somenergia.coop/docs') & handleClose() }>
+                PaperProps={{}}>
+                <MenuItem
+                  onClick={() =>
+                    openInNewTab('https://opendata.somenergia.coop/docs') &
+                    handleClose()
+                  }>
                   <ListItemIcon>
                     <HelpOutlineIcon />
                   </ListItemIcon>
-                  <Typography variant="inherit">{ t('API_DOCUMENTATION') }</Typography>
+                  <Typography variant="inherit">
+                    {t('API_DOCUMENTATION')}
+                  </Typography>
                 </MenuItem>
-                <MenuItem onClick={ () => openInNewTab('https://opendata.somenergia.coop/ui/gapminder.html') & handleClose() }>
+                <MenuItem
+                  onClick={() =>
+                    openInNewTab(
+                      'https://opendata.somenergia.coop/ui/gapminder.html'
+                    ) & handleClose()
+                  }>
                   <ListItemIcon>
                     <BubbleChart />
                   </ListItemIcon>
                   Gapminder
                 </MenuItem>
                 <Divider light />
-                {
-                  languages.map(({code, name}) => (
-                    <MenuItem 
-                      onClick={event => changeLanguage(code) & handleClose() }
-                      value={code}
-                    >
-                      <ListItemIcon>
-                      </ListItemIcon>
-                      { t(name) }
-                    </MenuItem>
-                  ))
-                }
+                {languages.map(({ code, name }) => (
+                  <MenuItem
+                    onClick={(event) => changeLanguage(code) & handleClose()}
+                    value={code}>
+                    <ListItemIcon></ListItemIcon>
+                    {t(name)}
+                  </MenuItem>
+                ))}
               </Menu>
-
             </Toolbar>
-            {
-            sending &&
-              <LinearProgress variant="indeterminate" />
-            }
+            {sending && <LinearProgress variant="indeterminate" />}
           </AppBar>
 
           <div className={classes.container}>
             <Grid spacing={2} container>
-
               <Grid item xs={12}>
-                <Alert severity="warning">{ t('ALPHA_DISCLAIMER') }</Alert>
+                <Alert severity="warning">{t('ALPHA_DISCLAIMER')}</Alert>
               </Grid>
 
               <Grid item xs={12} sm={4}>
@@ -297,48 +301,40 @@ function App() {
                     onSubmit={handleSubmit}
                     onClear={handleClear}
                     onChangeOptions={handleChangeOptions}
-                    initialValues={{...initialValues}}
+                    initialValues={{ ...initialValues }}
                   />
 
                   <Uri options={filterOptions} />
                 </Paper>
-
               </Grid>
 
               <Grid item xs={12} sm={8}>
-                {
-                  response && response.substring?.(0,5) !== 'blob:' &&
-                    <Paper className={classes.paperTabs}>
-                      <Tabs
-                        value={format}
-                        onChange={handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                      >
-                        <Tab label={ t('TABLE') } />
-                        <Tab label={ t('YAML') } />
-                        <Tab label={ t('JSON') } />
-                      </Tabs>
+                {response && response.substring?.(0, 5) !== 'blob:' && (
+                  <Paper className={classes.paperTabs}>
+                    <Tabs
+                      value={format}
+                      onChange={handleChange}
+                      indicatorColor="primary"
+                      textColor="primary">
+                      <Tab label={t('TABLE')} />
+                      <Tab label={t('YAML')} />
+                      <Tab label={t('JSON')} />
+                    </Tabs>
 
-                      <CSVLink className={classes.button} filename={`${filterOptions.metric}-${filterOptions.geoLevel}-${+ new Date()}.csv`} data={rowData}>
-                        <IconButton
-                          size="small"
-                          className={classes.button}
-                          color="default"
-                        >                          
-                          <GetAppIcon />
-                        </IconButton>
-                      </CSVLink>
-                    </Paper>
-                }
-                <ResponseWithFormat
-                  response={response}
-                  format={format}
-                />
+                    <IconButton
+                      size="small"
+                      className={classes.button}
+                      color="default"
+                      disabled={!response}
+                      onClick={downloadTSV}>
+                      <GetAppIcon />
+                    </IconButton>
+                  </Paper>
+                )}
+                <ResponseWithFormat response={response} format={format} />
               </Grid>
             </Grid>
           </div>
-
         </div>
       </MuiPickersUtilsProvider>
     </ThemeProvider>
