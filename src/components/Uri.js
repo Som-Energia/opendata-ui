@@ -33,7 +33,7 @@ const Uri = (props) => {
     <div className={classes.uri}>
       { uri.split('/').map((part, index) => {
           const auxClass = prevUri.split('/').includes(part) ? '' : 'text-uri-in'
-          return <span key={index} className={auxClass}>{part + '/'}</span>
+          return <span key={index} className={auxClass}>{ (index?'/':'') + part}</span>
         }
       )}
     </div>
