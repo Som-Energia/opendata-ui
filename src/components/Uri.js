@@ -6,7 +6,7 @@ import { urlFromOptions } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   uri: {
-    padding: '24px 0 8px',
+    padding: '8px 0 24px',
     display: 'flex',
     justifyContent: 'center',
     overflowWrap: 'anywhere',
