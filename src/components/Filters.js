@@ -24,8 +24,10 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import LanguageIcon from '@material-ui/icons/Language'
 import SearchIcon from '@material-ui/icons/Search'
+import Uri from './Uri'
 
 import { loadMetrics, loadGeoLevels, loadAllLocations, languages } from '../services/utils'
+
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -342,6 +344,8 @@ const Filters = (props) => {
           </Select>
         </FormControl>
       }
+
+      <Uri options={options} />
 
       <Button
         variant="contained"

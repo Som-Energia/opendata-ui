@@ -37,7 +37,6 @@ import BubbleChart from '@material-ui/icons/BubbleChart'
 import GetAppIcon from '@material-ui/icons/GetApp'
 
 import Filters from 'components/Filters'
-import Uri from 'components/Uri'
 
 import Table from 'components/formats/TableData'
 import Json from 'components/formats/JsonData'
@@ -304,7 +303,6 @@ function App() {
                     initialValues={{ ...initialValues }}
                   />
 
-                  <Uri options={filterOptions} />
                 </Paper>
               </Grid>
 

@@ -6,7 +6,7 @@ import { urlFromOptions } from '../services/utils'
 
 const useStyles = makeStyles((theme) => ({
   uri: {
-    padding: '24px 0 8px',
+    padding: '8px 0 24px',
     display: 'flex',
     justifyContent: 'center',
     overflowWrap: 'anywhere',
@@ -32,8 +32,8 @@ const Uri = (props) => {
   return (
     <div className={classes.uri}>
       { uri.split('/').map((part, index) => {
-          const auxClass = prevUri.split('/').includes(part) ? '' : 'text-uri-in'
-          return <span key={index} className={auxClass}>{part + '/'}</span>
+          const auxClass = !prevUri || prevUri.split('/').includes(part) ? '' : 'text-uri-in'
+          return <span key={index} className={auxClass}>{ (index?'/':'') + part}</span>
         }
       )}
     </div>
