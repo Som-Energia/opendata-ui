@@ -290,10 +290,6 @@ function App() {
 
           <div className={classes.container}>
             <Grid spacing={2} container>
-              <Grid item xs={12}>
-                <Alert severity="warning">{t('ALPHA_DISCLAIMER')}</Alert>
-              </Grid>
-
               <Grid item xs={12} sm={4}>
                 <Paper className={classes.paper}>
                   <Filters
