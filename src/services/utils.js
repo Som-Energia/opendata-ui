@@ -12,13 +12,15 @@ export const loadGeoLevels = async () => {
   })
 }
 
-export const loadMetrics = async () => {
+export const loadMetrics = async (language) => {
   const apiMetrics = []
-  return requestOpenApi(uriBase + '/discover/metrics').then((yamldata) => {
-    const data = yaml.load(yamldata)
-    apiMetrics.push(...data.metrics)
-    return apiMetrics
-  })
+  return requestOpenApi(uriBase + `/discover/metrics?lang=${language}`).then(
+    (yamldata) => {
+      const data = yaml.load(yamldata)
+      apiMetrics.push(...data.metrics)
+      return apiMetrics
+    }
+  )
 }
 
 export const loadAllLocations = async (geoLevels) => {
