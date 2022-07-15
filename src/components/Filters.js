@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
+import '../i18n/i18n.js'
 
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -66,7 +67,8 @@ const defaultValues = {
 
 const Filters = (props) => {
   const classes = useStyles()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const activeLanguage = i18n.language
 
   const {
     initialValues = {},
@@ -83,13 +85,13 @@ const Filters = (props) => {
 
   useEffect(() => {
     const loadFilters = async () => {
-      const metrics = await loadMetrics()
+      const metrics = await loadMetrics(activeLanguage)
       const geoLevels = await loadGeoLevels()
       setApiMetrics(metrics)
       setGeoLevels(geoLevels)
     }
     loadFilters()
-  }, [])
+  }, [activeLanguage])
 
   useEffect(() => {
     const loadFilters = async () => {
