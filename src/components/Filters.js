@@ -141,6 +141,9 @@ const Filters = (props) => {
           ))
         }
         </Select>
+        <FormHelperText>
+          {apiMetrics.filter((metric) => metric?.id === options?.metric)[0]?.description}
+        </FormHelperText>
       </FormControl>
 
       {
