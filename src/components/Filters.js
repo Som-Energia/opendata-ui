@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
+import ReactMarkdown from 'react-markdown'
 import { useTranslation } from 'react-i18next'
 
 import Button from '@material-ui/core/Button'
@@ -76,6 +77,7 @@ const Filters = (props) => {
   } = props
 
   const [apiMetrics, setApiMetrics] = useState([])
+  const [selectedMetric, setSelectedMetric] = useState()
   const [apiGeoLevels, setGeoLevels] = useState([])
   const [allLocations, setAllLocations] = useState([])
 
@@ -98,6 +100,10 @@ const Filters = (props) => {
     }
     loadFilters()
   }, [apiGeoLevels])
+
+  useEffect(() => {
+    setSelectedMetric(options?.metric ? apiMetrics.find(metric => metric.id === options.metric) : null)
+  }, [options, apiMetrics])
 
   useEffect( () => {
     onChangeOptions(options)
@@ -141,6 +147,9 @@ const Filters = (props) => {
           ))
         }
         </Select>
+        <FormHelperText component="div">
+          <ReactMarkdown>{ selectedMetric?.description }</ReactMarkdown>
+        </FormHelperText>
       </FormControl>
 
       {
