@@ -27,6 +27,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import Uri from './Uri'
 
 import { loadMetrics, loadGeoLevels, loadAllLocations, languages } from '../services/utils'
+import i18n from 'i18n/i18n'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -89,7 +90,7 @@ const Filters = (props) => {
       setGeoLevels(geoLevels)
     }
     loadFilters()
-  }, [])
+  }, [i18n.language])
 
   useEffect(() => {
     const loadFilters = async () => {
