@@ -76,6 +76,7 @@ const Filters = (props) => {
   } = props
 
   const [apiMetrics, setApiMetrics] = useState([])
+  const [selectedMetric, setSelectedMetric] = useState()
   const [apiGeoLevels, setGeoLevels] = useState([])
   const [allLocations, setAllLocations] = useState([])
 
@@ -98,6 +99,10 @@ const Filters = (props) => {
     }
     loadFilters()
   }, [apiGeoLevels])
+
+  useEffect(() => {
+    setSelectedMetric(options?.metric ? apiMetrics.find(metric => metric.id === options.metric) : null)
+  }, [options, apiMetrics])
 
   useEffect( () => {
     onChangeOptions(options)
@@ -141,6 +146,7 @@ const Filters = (props) => {
           ))
         }
         </Select>
+        <FormHelperText>{ selectedMetric?.description }</FormHelperText>
       </FormControl>
 
       {
