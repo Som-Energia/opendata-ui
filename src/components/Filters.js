@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import { makeStyles } from '@material-ui/core/styles'
+import ReactMarkdown from 'react-markdown'
 import { useTranslation } from 'react-i18next'
 
 import Button from '@material-ui/core/Button'
@@ -146,7 +147,9 @@ const Filters = (props) => {
           ))
         }
         </Select>
-        <FormHelperText>{ selectedMetric?.description }</FormHelperText>
+        <FormHelperText component="div">
+          <ReactMarkdown>{ selectedMetric?.description }</ReactMarkdown>
+        </FormHelperText>
       </FormControl>
 
       {
