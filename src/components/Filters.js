@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import ReactMarkdown from 'react-markdown'
 import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
 
@@ -141,6 +141,13 @@ const Filters = (props) => {
           ))
         }
         </Select>
+
+        <FormHelperText>
+          <ReactMarkdown>
+            {apiMetrics.find(metric => metric.id === options?.metric)?.description}
+          </ReactMarkdown>
+        </FormHelperText>
+
       </FormControl>
 
       {
