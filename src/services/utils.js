@@ -1,11 +1,12 @@
 import yaml from 'js-yaml'
 import * as dayjs from 'dayjs'
+import i18n from 'i18n/i18n'
 import { requestOpenApi } from './api'
 export const uriBase = 'https://opendata.somenergia.coop/v0.2'
 
 export const loadGeoLevels = async () => {
   const apiGeoLevels = []
-  return requestOpenApi(uriBase + '/discover/geolevel').then((yamldata) => {
+  return requestOpenApi(uriBase + `/discover/geolevel?lang=${i18n.language}`).then((yamldata) => {
     const data = yaml.load(yamldata)
     apiGeoLevels.push(...data.geolevels)
     return apiGeoLevels
@@ -14,7 +15,7 @@ export const loadGeoLevels = async () => {
 
 export const loadMetrics = async () => {
   const apiMetrics = []
-  return requestOpenApi(uriBase + '/discover/metrics').then((yamldata) => {
+  return requestOpenApi(uriBase + `/discover/metrics?lang=${i18n.language}`).then((yamldata) => {
     const data = yaml.load(yamldata)
     apiMetrics.push(...data.metrics)
     return apiMetrics
