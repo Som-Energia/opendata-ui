@@ -21,6 +21,8 @@
 - [x] Table: State and city unaligned
 - [x] URI: highlight URL changes (reuse Mar TDD'ed code in webforms-mithril)
 - [x] Bug: api geolevels might be loaded later and select does not work
+- [x] Fix: Requery metadata (metrics, geolevels...) when language changesa
+- [x] Show metric description
 - [ ] Relative: Take list from api (requires changes on api)
 - [ ] Bug: reset to a compatible geolevel when switching between map and data
 - [ ] Table: Big lists (many city or many dates) are not working
