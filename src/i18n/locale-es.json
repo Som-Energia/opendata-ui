@@ -38,5 +38,6 @@
   "CODE": "Codigo",
   "NAME": "Nombre",
   "NO_DATA": "No hay información",
+  "METRIC_DESCRIPTION": "Descripción de la métrica",
   "API_DOCUMENTATION": "Documentación de la API"
 }

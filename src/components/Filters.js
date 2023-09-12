@@ -15,7 +15,11 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Select from '@material-ui/core/Select'
+import Popover from '@material-ui/core/Popover'
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
 import Autocomplete from '@material-ui/lab/Autocomplete'
+import ReactMarkdown from 'react-markdown'
 
 import { DatePicker } from "@material-ui/pickers"
 
@@ -24,6 +28,7 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import LanguageIcon from '@material-ui/icons/Language'
 import SearchIcon from '@material-ui/icons/Search'
+import InfoIcon from '@material-ui/icons/Info'
 import Uri from './Uri'
 
 import { loadMetrics, loadGeoLevels, loadAllLocations, languages } from '../services/utils'
@@ -48,7 +53,17 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: 'none'
     },
     boxShadow: 'none'
-  }
+  },
+  popover: {
+    pointerEvents: 'none',
+    p: theme.spacing(3),
+    padding: '2rem',
+    maxWidth: 'min( 80%, 50rem )',
+  },
+  popoverContent: {
+    padding: theme.spacing(3),
+  },
+
 }))
 
 const defaultValues = {
@@ -81,6 +96,18 @@ const Filters = (props) => {
 
   const [options , setOptions] = useState({...defaultValues, ...initialValues})
 
+  const [metricPopOverAnchor, setMetricPopoverAnchor] = React.useState(null);
+  const handleDescriptionClick = (event) => {
+    setMetricPopoverAnchor((oldanchor) => oldanchor ? null : event.currentTarget)
+  }
+  const handleDescriptionHover = (event) => {
+    setMetricPopoverAnchor(event.currentTarget);
+  };
+  const handleDescriptionLeave = () => {
+    setMetricPopoverAnchor(null);
+  };
+  const isMetricPopoverOpen = Boolean(metricPopOverAnchor);
+
   useEffect(() => {
     const loadFilters = async () => {
       const metrics = await loadMetrics()
@@ -108,6 +135,7 @@ const Filters = (props) => {
     setOptions({...defaultValues, ...initialValues})
     onClear()
   }
+  const metric = apiMetrics?.find((m)=>m.id === options?.metric)
 
   return (
     <>
@@ -130,7 +158,7 @@ const Filters = (props) => {
           labelId="metric"
           value={options?.metric}
           onChange={ (event) => setOptions({ ...options, metric: event.target.value}) }
-          label={ t('METRICA') }
+          label={ t('METRIC') }
           fullWidth
         >
         {
@@ -141,6 +169,43 @@ const Filters = (props) => {
           ))
         }
         </Select>
+        <Button 
+          aria-owns={isMetricPopoverOpen ? 'mouse-over-popover' : undefined}
+          aria-haspopup="true"
+          onMouseEnter={handleDescriptionHover}
+          onClick={handleDescriptionClick}
+          onMouseLeave={handleDescriptionLeave}
+          startIcon={ <InfoIcon/> }
+        >
+          {t("METRIC_DESCRIPTION")}
+          <Popover
+            id="mouse-over-popover"
+            className={classes.popover}
+            classes={{
+              paper: classes.paper,
+            }}
+            open={isMetricPopoverOpen}
+            anchorEl={metricPopOverAnchor}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            onClose={handleDescriptionLeave}
+            disableRestoreFocus
+          >
+          <Box className={classes.popoverContent}>
+            <Typography component={"div"} sx={{ p: 2, width: '50%' }}>
+              <ReactMarkdown children={ 
+                `### ${metric?.text}\n\n${metric?.description}`
+              } />
+            </Typography>
+          </Box>
+          </Popover>
+        </Button>
       </FormControl>
 
       {

@@ -38,5 +38,6 @@
   "CODE": "Codi",
   "NAME": "Nom",
   "NO_DATA": "No hi ha informació",
+  "METRIC_DESCRIPTION": "Descripció de la mètrica",
   "API_DOCUMENTATION": "Documentació de l'API"
 }
