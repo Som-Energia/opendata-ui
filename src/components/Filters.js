@@ -81,7 +81,7 @@ const defaultValues = {
 
 const Filters = (props) => {
   const classes = useStyles()
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const {
     initialValues = {},
@@ -110,13 +110,13 @@ const Filters = (props) => {
 
   useEffect(() => {
     const loadFilters = async () => {
-      const metrics = await loadMetrics()
-      const geoLevels = await loadGeoLevels()
+      const metrics = await loadMetrics(i18n.language)
+      const geoLevels = await loadGeoLevels(i18n.language)
       setApiMetrics(metrics)
       setGeoLevels(geoLevels)
     }
     loadFilters()
-  }, [])
+  }, [i18n.language])
 
   useEffect(() => {
     const loadFilters = async () => {
