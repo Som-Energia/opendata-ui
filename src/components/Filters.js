@@ -21,7 +21,7 @@ import Typography from '@material-ui/core/Typography'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import ReactMarkdown from 'react-markdown'
 
-import { DatePicker } from "@material-ui/pickers"
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
 import ClearIcon from '@material-ui/icons/Clear'
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday'

@@ -8,10 +8,10 @@ import {
 import { useTranslation } from 'react-i18next'
 import './i18n/i18n.js'
 
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+import { LocalizationProvider }  from '@mui/x-date-pickers/LocalizationProvider'
 
 import 'moment/locale/ca'
-import MomentUtils from '@date-io/moment'
 
 import AppBar from '@material-ui/core/AppBar'
 import Paper from '@material-ui/core/Paper'
@@ -224,7 +224,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <MuiPickersUtilsProvider utils={MomentUtils}>
+      <LocalizationProvider dateAdapter={AdapterMoment}>
         <div className={classes.root}>
           <AppBar position="fixed" elevation={0} color="inherit">
             <Toolbar>
@@ -330,7 +330,7 @@ function App() {
             </Grid>
           </div>
         </div>
-      </MuiPickersUtilsProvider>
+      </LocalizationProvider>
     </ThemeProvider>
   )
 }
