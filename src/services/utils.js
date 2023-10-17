@@ -35,15 +35,35 @@ export const loadAllLocations = async (geoLevels) => {
       }
       return requestOpenApi(uriBase + `/discover/geolevel/${geolevel.id}`).then(
         (yamldata) => {
+          /*
+             Work around on yaml library problems
+
+             Due to a bug in js-yaml, non-octal 0 padded numeric codes
+             are parsed as number instead strings and we are losing
+             the code zero padding.
+
+             https://github.com/nodeca/js-yaml/issues/684
+          */
+          function paddingHack(geolevel, id) {
+             const padding = {
+               ccaa: 2,
+               state: 2,
+               city: 5,
+             }
+            const geolevelPadding = padding[geolevel]
+            if (geolevelPadding === undefined) return id;
+            return (id+"").padStart(geolevelPadding, '0')
+          }
           const data = yaml.load(yamldata)
           for (const [id, text] of Object.entries(data.options)) {
+            const paddedId = paddingHack(geolevel.id, id)
             allLocations.push({
-              id,
+              id: paddedId,
               text,
               level: geolevel,
               filterText: `${text} (${geolevel.text})`,
-              filterQuery: `${geolevel.id}=${id}`,
-              key: id
+              filterQuery: `${geolevel.id}=${paddedId}`,
+              key: paddedId,
             })
           }
         }
