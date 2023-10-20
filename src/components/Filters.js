@@ -32,6 +32,7 @@ import InfoIcon from '@material-ui/icons/Info'
 import Uri from './Uri'
 
 import { loadMetrics, loadGeoLevels, loadAllLocations, languages } from '../services/utils'
+import i18n from 'i18n/i18n'
 
 
 const useStyles = makeStyles((theme) => ({
