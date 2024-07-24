@@ -266,7 +266,7 @@ function App() {
                 <MenuItem
                   onClick={() =>
                     openInNewTab(
-                      'https://opendata.somenergia.coop/ui/gapminder.html'
+                      'https://opendata.somenergia.coop/ui/gapminder'
                     ) & handleClose()
                   }>
                   <ListItemIcon>
