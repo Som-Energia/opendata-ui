@@ -24,7 +24,7 @@ so that the links `scripts/deploy-*.conf` are not broken,
 and then:
 
 ```bash
-make deploy-production  # To deploy in production
+scripts/deploy.sh production
 ```
 
 If you are not SomEnergia staff you can create a deployment configuration
