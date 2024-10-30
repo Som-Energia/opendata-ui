@@ -59,11 +59,12 @@ deploy_server=$DEPLOYMENT_HOST
 deploy_path=$DEPLOYMENT_PATH
 port="$DEPLOYMENT_PORT"
 user="$DEPLOYMENT_USER"
+deploy_prefix="${DEPLOYMENT_PREFIX:-build}"
 
 today=$(date +"%Y-%m-%d_%H%M%S")
-version_dir="opendata-ui-$today"
+version_dir="$deploy_prefix-$today"
 dest_dir="$deploy_path/$version_dir"
-app_dir="$deploy_path/opendata-ui"
+app_dir="$deploy_path/$deploy_prefix"
 
 function build () {
     log_message "INFO" "Building project $build"
