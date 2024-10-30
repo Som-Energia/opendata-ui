@@ -1,5 +1,9 @@
 # Open Data UI
 
+[![CI Status](https://github.com/Som-Energia/somenergia-tomatic/actions/workflows/main.yml/badge.svg)](https://github.com/Som-Energia/opendata-ui/actions/workflows/main.yml)
+[![Coverage Status](https://coveralls.io/repos/github/Som-Energia/opendata-ui/badge.svg?branch=main)](https://coveralls.io/github/Som-Energia/opendata-ui?branch=main)
+
+
 Web UI to Som Energia Open Data API.
 
 <https://opendata.somenergia.coop>
