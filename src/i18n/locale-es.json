@@ -39,5 +39,6 @@
   "NAME": "Nombre",
   "NO_DATA": "No hay información",
   "METRIC_DESCRIPTION": "Descripción de la métrica",
-  "API_DOCUMENTATION": "Documentación de la API"
+  "API_DOCUMENTATION": "Documentación de la API",
+  "disclaimer_text": "Este portal opera actualmente sin soporte activo. El servicio se mantiene operativo pero no se garantiza la integridad o actualización de los datos."
 }

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 import './i18n/i18n.js'
 
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
-import { LocalizationProvider }  from '@mui/x-date-pickers/LocalizationProvider'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 
 import 'moment/locale/ca'
 
@@ -37,6 +37,7 @@ import BubbleChart from '@material-ui/icons/BubbleChart'
 import GetAppIcon from '@material-ui/icons/GetApp'
 
 import Filters from 'components/Filters'
+import Disclaimer from 'components/Disclaimer'
 
 import Table from 'components/formats/TableData'
 import Json from 'components/formats/JsonData'
@@ -91,7 +92,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     width: '100%',
     padding: theme.spacing(3),
-    paddingTop: theme.spacing(10)
   },
   paper: {
     padding: theme.spacing(2),
@@ -226,7 +226,8 @@ function App() {
       <CssBaseline />
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <div className={classes.root}>
-          <AppBar position="fixed" elevation={0} color="inherit">
+          <AppBar position="sticky" elevation={0} color="inherit">
+            <Disclaimer />
             <Toolbar>
               <Typography variant="h6" className={classes.title}>
                 <img
