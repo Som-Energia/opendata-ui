@@ -7,7 +7,7 @@ const Disclaimer = () => {
 
     return (
         <Alert severity="warning" style={{ justifyContent: 'center' }}>
-            {t('disclaimer_text')}
+            {t('DISCLAIMER')}
         </Alert>
     )
 }
