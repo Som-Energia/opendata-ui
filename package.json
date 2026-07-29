@@ -53,10 +53,9 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-react-app": "*",
     "prettier-config-standard": "^4.0.0",
     "react-scripts": "^5.0.1",
-    "standard": "^16.0.2"
+    "standard": "^17.1.2"
   },
   "prettier": "prettier-config-standard"
 }
