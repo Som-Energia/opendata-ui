@@ -1,0 +1,378 @@
+# npm audit report
+
+@tootallnate/once  <2.0.1
+@tootallnate/once vulnerable to Incorrect Control Flow Scoping - https://github.com/advisories/GHSA-vpq2-c234-7xj6
+fix available via `npm audit fix`
+node_modules/@tootallnate/once
+  http-proxy-agent  4.0.1
+  Depends on vulnerable versions of @tootallnate/once
+  node_modules/http-proxy-agent
+    jsdom  16.6.0 - 17.0.0
+    Depends on vulnerable versions of http-proxy-agent
+    node_modules/jsdom
+      jest-environment-jsdom  27.0.1 - 27.5.1
+      Depends on vulnerable versions of jsdom
+      node_modules/jest-environment-jsdom
+        jest-config  >=19.1.0-alpha.eed82034
+        Depends on vulnerable versions of @jest/test-sequencer
+        Depends on vulnerable versions of babel-jest
+        Depends on vulnerable versions of glob
+        Depends on vulnerable versions of jest-circus
+        Depends on vulnerable versions of jest-environment-jsdom
+        Depends on vulnerable versions of jest-jasmine2
+        Depends on vulnerable versions of jest-runner
+        node_modules/jest-config
+          jest-cli  >=19.1.0-alpha.eed82034
+          Depends on vulnerable versions of @jest/core
+          Depends on vulnerable versions of jest-config
+          node_modules/jest-cli
+            jest  >=19.1.0-alpha.eed82034
+            Depends on vulnerable versions of @jest/core
+            Depends on vulnerable versions of jest-cli
+            node_modules/jest
+              jest-watch-typeahead  >=0.6.0
+              Depends on vulnerable versions of jest
+              node_modules/jest-watch-typeahead
+        jest-runner  >=24.0.0-alpha.0
+        Depends on vulnerable versions of @jest/transform
+        Depends on vulnerable versions of jest-environment-jsdom
+        Depends on vulnerable versions of jest-runtime
+        node_modules/jest-runner
+          @jest/core  *
+          Depends on vulnerable versions of @jest/reporters
+          Depends on vulnerable versions of @jest/transform
+          Depends on vulnerable versions of jest-config
+          Depends on vulnerable versions of jest-resolve-dependencies
+          Depends on vulnerable versions of jest-runner
+          Depends on vulnerable versions of jest-runtime
+          Depends on vulnerable versions of jest-snapshot
+          Depends on vulnerable versions of rimraf
+          node_modules/@jest/core
+
+axios  <=0.32.0
+Severity: high
+Axios Cross-Site Request Forgery Vulnerability - https://github.com/advisories/GHSA-wf5p-g6vw-rhxx
+axios Requests Vulnerable To Possible SSRF and Credential Leakage via Absolute URL - https://github.com/advisories/GHSA-jr5f-v2jv-69x6
+Axios has a NO_PROXY Hostname Normalization Bypass that Leads to SSRF - https://github.com/advisories/GHSA-3p68-rc4w-qgx5
+Axios: Authentication Bypass via Prototype Pollution Gadget in `validateStatus` Merge Strategy - https://github.com/advisories/GHSA-w9j2-pvgh-6h63
+Axios: Incomplete Fix for CVE-2025-62718 — NO_PROXY Protection Bypassed via RFC 1122 Loopback Subnet (127.0.0.0/8) in Axios 1.15.0 - https://github.com/advisories/GHSA-pmwg-cvhr-8vh7
+Axios: Null Byte Injection via Reverse-Encoding in AxiosURLSearchParams - https://github.com/advisories/GHSA-xhjh-pmcv-23jw
+Axios: no_proxy bypass via IP alias allows SSRF - https://github.com/advisories/GHSA-m7pr-hjqh-92cm
+Axios' HTTP adapter-streamed uploads bypass maxBodyLength when maxRedirects: 0 - https://github.com/advisories/GHSA-5c9x-8gcm-mpgx
+Axios: HTTP adapter streamed responses bypass maxContentLength - https://github.com/advisories/GHSA-vf2m-468p-8v99
+Axios: Prototype Pollution Gadgets - Response Tampering, Data Exfiltration, and Request Hijacking - https://github.com/advisories/GHSA-pf86-5x62-jrwf
+Axios: Header Injection via Prototype Pollution - https://github.com/advisories/GHSA-6chq-wfr3-2hj9
+Axios: XSRF Token Cross-Origin Leakage via Prototype Pollution Gadget in `withXSRFToken` Boolean Coercion - https://github.com/advisories/GHSA-xx6v-rp6x-q39c
+Axios is Vulnerable to Denial of Service via __proto__ Key in mergeConfig - https://github.com/advisories/GHSA-43fc-jf86-j433
+Axios has Unrestricted Cloud Metadata Exfiltration via Header Injection Chain - https://github.com/advisories/GHSA-fvcv-3m26-pcqx
+Axios: unbounded recursion in toFormData causes DoS via deeply nested request data - https://github.com/advisories/GHSA-62hf-57xw-28j9
+Axios: Regular Expression Denial of Service (ReDoS) via Cookie Name Injection - https://github.com/advisories/GHSA-hfxv-24rg-xrqf
+Axios: Proxy-Authorization Credential Leak to Origin Server Across HTTP-to-HTTPS Redirect in Axios Node.js HTTP Adapter - https://github.com/advisories/GHSA-p92q-9vqr-4j8v
+Axios: Proxy-Authorization header leaks to redirect target when proxy is re-evaluated to direct connection - https://github.com/advisories/GHSA-j5f8-grm9-p9fc
+axios Vulnerable to Credential Theft and Response Hijacking via Prototype Pollution Gadget in Config Merge - https://github.com/advisories/GHSA-3g43-6gmg-66jw
+axios has DoS & Header Injection via Prototype Pollution Read-Side Gadgets in axios merge functions - https://github.com/advisories/GHSA-898c-q2cr-xwhg
+axios's shouldBypassProxy does not recognize IPv4-mapped IPv6 addresses, allowing NO_PROXY bypass (incomplete fix for CVE-2025-62718) - https://github.com/advisories/GHSA-pjwm-pj3p-43mv
+Axios: Prototype pollution gadgets can alter axios request construction - https://github.com/advisories/GHSA-mmx7-hfxf-jppx
+Axios: Nested axios option objects can consume polluted prototype values - https://github.com/advisories/GHSA-7q8q-rj6j-mhjq
+fix available via `npm audit fix --force`
+Will install axios@1.19.0, which is a breaking change
+node_modules/axios
+
+brace-expansion  <=5.0.7
+Severity: high
+brace-expansion: DoS via unbounded expansion length causing an out-of-memory process crash - https://github.com/advisories/GHSA-mh99-v99m-4gvg
+fix available via `npm audit fix --force`
+Will install standard@16.0.3, which is a breaking change
+node_modules/brace-expansion
+node_modules/filelist/node_modules/brace-expansion
+  minimatch  2.0.0 - 10.0.2
+  Depends on vulnerable versions of brace-expansion
+  node_modules/filelist/node_modules/minimatch
+  node_modules/minimatch
+    @eslint/eslintrc  0.0.1 || >=0.1.1
+    Depends on vulnerable versions of minimatch
+    node_modules/@eslint/eslintrc
+      eslint  0.12.0 - 2.0.0-rc.1 || 4.1.0 - 10.0.0-rc.2
+      Depends on vulnerable versions of @eslint/eslintrc
+      Depends on vulnerable versions of @humanwhocodes/config-array
+      Depends on vulnerable versions of file-entry-cache
+      Depends on vulnerable versions of minimatch
+      node_modules/eslint
+        @babel/eslint-parser  7.16.0 - 8.0.0-rc.6
+        Depends on vulnerable versions of eslint
+        node_modules/@babel/eslint-parser
+        @typescript-eslint/eslint-plugin  <=8.55.1-alpha.3
+        Depends on vulnerable versions of @typescript-eslint/parser
+        Depends on vulnerable versions of @typescript-eslint/type-utils
+        Depends on vulnerable versions of @typescript-eslint/utils
+        Depends on vulnerable versions of eslint
+        node_modules/@typescript-eslint/eslint-plugin
+          eslint-config-react-app  >=0.3.0-alpha.9c45b252
+          Depends on vulnerable versions of @babel/eslint-parser
+          Depends on vulnerable versions of @typescript-eslint/eslint-plugin
+          Depends on vulnerable versions of @typescript-eslint/parser
+          Depends on vulnerable versions of eslint
+          Depends on vulnerable versions of eslint-plugin-flowtype
+          Depends on vulnerable versions of eslint-plugin-import
+          Depends on vulnerable versions of eslint-plugin-jest
+          Depends on vulnerable versions of eslint-plugin-jsx-a11y
+          Depends on vulnerable versions of eslint-plugin-react
+          Depends on vulnerable versions of eslint-plugin-testing-library
+          node_modules/eslint-config-react-app
+          eslint-plugin-jest  25.0.1 - 29.12.2
+          Depends on vulnerable versions of @typescript-eslint/eslint-plugin
+          Depends on vulnerable versions of eslint
+          node_modules/eslint-plugin-jest
+        @typescript-eslint/experimental-utils  >=5.7.1-alpha.0
+        Depends on vulnerable versions of @typescript-eslint/utils
+        Depends on vulnerable versions of eslint
+        node_modules/@typescript-eslint/experimental-utils
+        @typescript-eslint/parser  1.1.1-alpha.0 - 8.55.1-alpha.3
+        Depends on vulnerable versions of eslint
+        node_modules/@typescript-eslint/parser
+        @typescript-eslint/utils  <=8.55.1-alpha.3
+        Depends on vulnerable versions of eslint
+        node_modules/@typescript-eslint/utils
+          @typescript-eslint/type-utils  5.9.2-alpha.0 - 8.55.1-alpha.3
+          Depends on vulnerable versions of @typescript-eslint/utils
+          node_modules/@typescript-eslint/type-utils
+          eslint-plugin-testing-library  3.3.1 - 7.15.4
+          Depends on vulnerable versions of @typescript-eslint/utils
+          Depends on vulnerable versions of eslint
+          node_modules/eslint-plugin-testing-library
+        eslint-config-standard  4.0.0-0 - 4.3.1 || >=8.0.0-beta.0
+        Depends on vulnerable versions of eslint
+        Depends on vulnerable versions of eslint-plugin-import
+        Depends on vulnerable versions of eslint-plugin-n
+        Depends on vulnerable versions of eslint-plugin-promise
+        node_modules/eslint-config-standard
+          standard  2.0.0 - 5.2.2 || >=10.0.0-beta.0
+          Depends on vulnerable versions of eslint
+          Depends on vulnerable versions of eslint-config-standard
+          Depends on vulnerable versions of eslint-config-standard-jsx
+          Depends on vulnerable versions of eslint-plugin-import
+          Depends on vulnerable versions of eslint-plugin-n
+          Depends on vulnerable versions of eslint-plugin-promise
+          Depends on vulnerable versions of eslint-plugin-react
+          node_modules/standard
+        eslint-config-standard-jsx  >=10.0.0
+        Depends on vulnerable versions of eslint
+        Depends on vulnerable versions of eslint-plugin-react
+        node_modules/eslint-config-standard-jsx
+        eslint-plugin-flowtype  >=5.0.0
+        Depends on vulnerable versions of eslint
+        node_modules/eslint-plugin-flowtype
+        eslint-plugin-promise  5.0.0 - 7.2.1
+        Depends on vulnerable versions of eslint
+        node_modules/eslint-plugin-promise
+        eslint-webpack-plugin  <=5.0.3
+        Depends on vulnerable versions of eslint
+        node_modules/eslint-webpack-plugin
+          react-scripts  >=0.1.0
+          Depends on vulnerable versions of @svgr/webpack
+          Depends on vulnerable versions of babel-jest
+          Depends on vulnerable versions of css-minimizer-webpack-plugin
+          Depends on vulnerable versions of eslint
+          Depends on vulnerable versions of eslint-config-react-app
+          Depends on vulnerable versions of eslint-webpack-plugin
+          Depends on vulnerable versions of jest
+          Depends on vulnerable versions of jest-watch-typeahead
+          Depends on vulnerable versions of react-dev-utils
+          Depends on vulnerable versions of resolve-url-loader
+          Depends on vulnerable versions of webpack-dev-server
+          Depends on vulnerable versions of workbox-webpack-plugin
+          node_modules/react-scripts
+    @humanwhocodes/config-array  *
+    Depends on vulnerable versions of minimatch
+    node_modules/@humanwhocodes/config-array
+    eslint-plugin-import  >=1.15.0
+    Depends on vulnerable versions of minimatch
+    node_modules/eslint-plugin-import
+    eslint-plugin-jsx-a11y  >=6.5.0
+    Depends on vulnerable versions of minimatch
+    node_modules/eslint-plugin-jsx-a11y
+    eslint-plugin-n  <=17.21.1
+    Depends on vulnerable versions of minimatch
+    node_modules/eslint-plugin-n
+    eslint-plugin-react  >=7.23.0
+    Depends on vulnerable versions of minimatch
+    node_modules/eslint-plugin-react
+    filelist  0.0.5 - 1.0.6
+    Depends on vulnerable versions of minimatch
+    node_modules/filelist
+      jake  10.6.1 - 10.9.4
+      Depends on vulnerable versions of filelist
+      node_modules/jake
+        ejs  3.1.2 - 4.0.1
+        Depends on vulnerable versions of jake
+        node_modules/ejs
+          @surma/rollup-plugin-off-main-thread  >=2.2.0
+          Depends on vulnerable versions of ejs
+          node_modules/@surma/rollup-plugin-off-main-thread
+            workbox-build  <=7.4.0
+            Depends on vulnerable versions of @surma/rollup-plugin-off-main-thread
+            Depends on vulnerable versions of glob
+            Depends on vulnerable versions of rollup-plugin-terser
+            node_modules/workbox-build
+              workbox-webpack-plugin  5.0.0-alpha.0 - 7.0.0
+              Depends on vulnerable versions of workbox-build
+              node_modules/workbox-webpack-plugin
+    fork-ts-checker-webpack-plugin  >=0.2.9
+    Depends on vulnerable versions of glob
+    Depends on vulnerable versions of minimatch
+    node_modules/fork-ts-checker-webpack-plugin
+      react-dev-utils  >=0.5.2
+      Depends on vulnerable versions of fork-ts-checker-webpack-plugin
+      Depends on vulnerable versions of recursive-readdir
+      node_modules/react-dev-utils
+    glob  4.3.0 - 10.5.0
+    Depends on vulnerable versions of minimatch
+    node_modules/glob
+      @jest/reporters  *
+      Depends on vulnerable versions of @jest/transform
+      Depends on vulnerable versions of glob
+      node_modules/@jest/reporters
+      jest-runtime  >=24.0.0-alpha.0
+      Depends on vulnerable versions of @jest/transform
+      Depends on vulnerable versions of glob
+      Depends on vulnerable versions of jest-snapshot
+      node_modules/jest-runtime
+        @jest/test-sequencer  <=28.0.0-alpha.11
+        Depends on vulnerable versions of jest-runtime
+        node_modules/@jest/test-sequencer
+        jest-circus  >=25.2.4
+        Depends on vulnerable versions of jest-runtime
+        Depends on vulnerable versions of jest-snapshot
+        node_modules/jest-circus
+        jest-jasmine2  >=24.2.0-alpha.0
+        Depends on vulnerable versions of jest-runtime
+        Depends on vulnerable versions of jest-snapshot
+        node_modules/jest-jasmine2
+      rimraf  2.3.0 - 3.0.2 || 4.2.0 - 5.0.10
+      Depends on vulnerable versions of glob
+      node_modules/rimraf
+        flat-cache  1.3.4 - 4.0.0
+        Depends on vulnerable versions of rimraf
+        node_modules/flat-cache
+          file-entry-cache  4.0.0 - 7.0.2
+          Depends on vulnerable versions of flat-cache
+          node_modules/file-entry-cache
+        webpack-dev-server  <=5.2.6
+        Depends on vulnerable versions of rimraf
+        Depends on vulnerable versions of sockjs
+        node_modules/webpack-dev-server
+      test-exclude  4.2.2 || 5.0.0 - 7.0.2
+      Depends on vulnerable versions of glob
+      Depends on vulnerable versions of minimatch
+      node_modules/test-exclude
+        babel-plugin-istanbul  5.0.1 - 7.0.1
+        Depends on vulnerable versions of test-exclude
+        node_modules/babel-plugin-istanbul
+          @jest/transform  *
+          Depends on vulnerable versions of babel-plugin-istanbul
+          node_modules/@jest/transform
+            babel-jest  >=24.0.0-alpha.0
+            Depends on vulnerable versions of @jest/transform
+            Depends on vulnerable versions of babel-plugin-istanbul
+            node_modules/babel-jest
+            jest-snapshot  >=27.0.0-next.0
+            Depends on vulnerable versions of @jest/transform
+            node_modules/jest-snapshot
+              jest-resolve-dependencies  >=27.0.0-next.0
+              Depends on vulnerable versions of jest-snapshot
+              node_modules/jest-resolve-dependencies
+    recursive-readdir  >=2.1.0
+    Depends on vulnerable versions of minimatch
+    node_modules/recursive-readdir
+
+nth-check  <2.0.1
+Severity: high
+Inefficient Regular Expression Complexity in nth-check - https://github.com/advisories/GHSA-rp65-9cf3-cjxr
+fix available via `npm audit fix --force`
+Will install react-scripts@0.0.0, which is a breaking change
+node_modules/svgo/node_modules/nth-check
+  css-select  <=3.1.0
+  Depends on vulnerable versions of nth-check
+  node_modules/svgo/node_modules/css-select
+    svgo  1.0.0 - 2.8.2
+    Depends on vulnerable versions of css-select
+    node_modules/svgo
+      @svgr/plugin-svgo  <=5.5.0
+      Depends on vulnerable versions of svgo
+      node_modules/@svgr/plugin-svgo
+        @svgr/webpack  4.0.0 - 5.5.0
+        Depends on vulnerable versions of @svgr/plugin-svgo
+        node_modules/@svgr/webpack
+
+postcss  <=8.5.17
+Severity: high
+PostCSS line return parsing error - https://github.com/advisories/GHSA-7fh5-64p2-3v2j
+PostCSS has XSS via Unescaped </style> in its CSS Stringify Output - https://github.com/advisories/GHSA-qx2v-qp2m-jg93
+PostCSS: Arbitrary file read and information disclosure via attacker-controlled sourceMappingURL in CSS comments - https://github.com/advisories/GHSA-6g55-p6wh-862q
+PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure - https://github.com/advisories/GHSA-r28c-9q8g-f849
+fix available via `npm audit fix --force`
+Will install react-scripts@0.0.0, which is a breaking change
+node_modules/resolve-url-loader/node_modules/postcss
+  resolve-url-loader  0.0.1-experiment-postcss || 3.0.0-alpha.1 - 4.0.0
+  Depends on vulnerable versions of postcss
+  node_modules/resolve-url-loader
+
+prismjs  <1.30.0
+Severity: moderate
+PrismJS DOM Clobbering vulnerability - https://github.com/advisories/GHSA-x7hr-w5r2-h6wg
+fix available via `npm audit fix --force`
+Will install react-syntax-highlighter@16.1.1, which is a breaking change
+node_modules/refractor/node_modules/prismjs
+  refractor  <=4.6.0
+  Depends on vulnerable versions of prismjs
+  node_modules/refractor
+    react-syntax-highlighter  6.0.0 - 15.6.6
+    Depends on vulnerable versions of refractor
+    node_modules/react-syntax-highlighter
+
+serialize-javascript  <=7.0.4
+Severity: high
+Serialize JavaScript is Vulnerable to RCE via RegExp.flags and Date.prototype.toISOString() - https://github.com/advisories/GHSA-5c6j-r48x-rmvq
+Serialize JavaScript has CPU Exhaustion Denial of Service via crafted array-like objects - https://github.com/advisories/GHSA-qj8w-gfj5-8c6v
+fix available via `npm audit fix --force`
+Will install react-scripts@0.0.0, which is a breaking change
+node_modules/rollup-plugin-terser/node_modules/serialize-javascript
+node_modules/serialize-javascript
+  css-minimizer-webpack-plugin  1.1.4 - 7.0.4
+  Depends on vulnerable versions of serialize-javascript
+  node_modules/css-minimizer-webpack-plugin
+  rollup-plugin-terser  3.0.0 || >=4.0.4
+  Depends on vulnerable versions of serialize-javascript
+  node_modules/rollup-plugin-terser
+
+
+underscore  <=1.13.7
+Severity: high
+Underscore has unlimited recursion in _.flatten and _.isEqual, potential for DoS attack - https://github.com/advisories/GHSA-qpx9-hpmf-5gmw
+fix available via `npm audit fix`
+node_modules/underscore
+  jsonpath  *
+  Depends on vulnerable versions of underscore
+  node_modules/jsonpath
+    bfj  7.1.0 - 9.1.2
+    Depends on vulnerable versions of jsonpath
+    node_modules/bfj
+
+uuid  <11.1.1
+Severity: moderate
+uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided - https://github.com/advisories/GHSA-w5hq-g745-h8pq
+fix available via `npm audit fix --force`
+Will install react-scripts@0.0.0, which is a breaking change
+node_modules/uuid
+  sockjs  >=0.3.17
+  Depends on vulnerable versions of uuid
+  node_modules/sockjs
+
+
+79 vulnerabilities (4 low, 7 moderate, 68 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force

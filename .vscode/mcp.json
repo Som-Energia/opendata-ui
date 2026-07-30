@@ -1,0 +1,17 @@
+{
+  "servers": {
+    "datamate": {
+      "type": "stdio",
+      "command": "/usr/share/code/code",
+      "args": [
+        "/home/diego/.vscode/extensions/altimateai.vscode-altimate-mcp-server-0.8.9-linux-x64/dist/datamate-cli.js",
+        "start-stdio"
+      ],
+      "env": {
+        "ALTIMATE_EXTENSION_RPC": "/tmp/altimate-mcp-4122276.sock",
+        "ELECTRON_RUN_AS_NODE": "1"
+      },
+      "updatedAt": "2026-07-30T21:03:36.220Z"
+    }
+  }
+}
