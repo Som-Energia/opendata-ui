@@ -13,20 +13,21 @@
 | Run tests (watch) | `npx vitest` | Watch mode for TDD |
 | Production build | `npm run build` | Outputs to `dist/` |
 | Preview production build | `npx vite preview` | Serves `dist/` locally |
-| Lint | `npx standard` | |
+| Lint | `npx eslint` | Uses eslint flat config (`eslint.config.mjs`) |
 | Deploy | `scripts/deploy.sh <environment>` | Requires `scripts/deploy-<env>.conf` |
 
 ## Tech Stack
 
-- **React 17** + **Vite 5** (`@vitejs/plugin-react`) — no CRA, no `react-scripts`
+- **React 17** + **Vite 6** (`@vitejs/plugin-react`) — no CRA, no `react-scripts`
 - **Material-UI v4** (`@material-ui/core`) — most UI components
 - **MUI X Date Pickers v6** (`@mui/x-date-pickers`) — only the date pickers; requires `AdapterMoment`
 - **Styling**: Material-UI `makeStyles` + a custom theme in `App.jsx`
-- **HTTP**: `axios`
+- **HTTP**: `axios` 1.x
 - **i18n**: `react-i18next` with 4 locales (`ca`, `es`, `gl`, `eu`)
-- **Lint**: `standard` (JS Standard Style)
+- **Lint**: ESLint flat config (`eslint.config.mjs`) — StandardJS rules using only core rules
 - **Format**: Prettier with `prettier-config-standard`
-- **Test**: Vitest 2 + `@testing-library/react` v11 + `jsdom`
+- **Test**: Vitest 3 + `@testing-library/react` v11 + `jsdom`
+- **Security**: 0 npm audit vulnerabilities across all deps
 
 ## Architecture
 
@@ -79,7 +80,7 @@ src/
 
 ## Code Style
 
-- Follow **JavaScript Standard Style** (`standard`).
+- Follow **JavaScript Standard Style** (via `eslint.config.mjs` using only core rules — no `standard` package).
 - Prettier config is inherited from `prettier-config-standard` — do not add a local `.prettierrc` unless required.
 - Semicolons are **omitted** (Standard Style).
 - All components use `.jsx` extension (Vite Rollup parser requirement).
@@ -101,9 +102,20 @@ src/
 ## CI / GitHub Actions
 
 - Workflow: `.github/workflows/main.yml`.
-- Runs on Node 20 (`.nvmrc` says v22, but CI matrix uses 20 — consider updating CI to v22).
+- Runs on Node 24.
 - Steps: `npm install` → `npm install coveralls --save-dev` → `npx vitest run`.
 - Uses `actions/checkout@v2` (older version — consider upgrading to v4).
+- Send notifications via `Som-Energia/ghactions-notify@main` on completion.
+
+## Security Notes
+
+- **0 npm audit vulnerabilities** across all dependencies (prod + dev).
+- **No secrets in client code**: API base URL is a hardcoded public endpoint (`https://opendata.somenergia.coop/v0.2`). No tokens, keys, or credentials.
+- **XSS surface is minimal**: All user-facing output goes through React's built-in escaping. The one exception is `ReactMarkdown` in `Filters.jsx` which renders `metric?.description` from the API — the API is trusted, but be aware that markdown can include arbitrary HTML.
+- **`js-yaml.load()` is safe**: js-yaml v4 defaults to safe loading (no `!!js/` tag execution).
+- **CSP**: No Content Security Policy in the app. Configure it in nginx if needed.
+- **Deploy script risk**: `scripts/deploy.sh` uses `rm; ln` for atomic swap — if the process fails between `rm` and `ln`, the site stays down. Also missing `set -e` so errors may not halt execution.
+- **CI**: `.github/workflows/main.yml` uses `actions/checkout@v2` — consider upgrading to v4.
 
 ## Known Quirks
 
@@ -112,6 +124,8 @@ src/
 - **Map responses**: when the URL contains `/map/`, `api.js` requests a `blob` and returns an object URL (`blob:...`). `App.js` renders this as an `<img>`.
 - **No routing**: Single page, no `react-router`. Tabs (Table/YAML/JSON) are local state.
 - **State management**: Plain React `useState` in `App.js`. No Redux, no context.
+- **`URL.createObjectURL` not revoked**: Blob URLs in `api.js` for map images are never released via `URL.revokeObjectURL()` — minor memory leak on repeated map queries.
+- **Package.json uses `"type": "module"`**: Node treats all `.js` files as ESM. Config files use ESM syntax (`import`, `export`, `import.meta.url`).
 
 ## Adding a New Metric or Geo Level
 
