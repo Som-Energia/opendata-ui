@@ -1,11 +1,11 @@
 schema: spec-driven
 
 context: |
-  React 17 SPA with react-scripts 5, Node 22.
+  React 17 SPA with Vite 6, Node 24.
   Material-UI v4 + Emotion styling.
   JS (no TypeScript). i18next for localization.
-  Jest via react-scripts; @testing-library/react.
-  Standard JS + Prettier config.
+  Vitest + @testing-library/react.
+  ESLint flat config (StandardJS rules) + Prettier.
 
 rules:
   proposal:
@@ -23,9 +23,9 @@ rules:
     guidelines:
       - Follow existing code patterns (functional components, hooks)
     tdd: true
-    test_command: "npm test -- --watchAll=false"
+    test_command: "npm run test"
   verify:
-    test_command: "npm test -- --watchAll=false"
+    test_command: "npm run test"
     build_command: "npm run build"
     coverage_threshold: 0
   archive:
@@ -35,12 +35,12 @@ testing:
   strict_tdd: true
   detected: 2026-07-30
   runner:
-    command: "npm test"
-    framework: "Jest (via react-scripts)"
+    command: "npm run test"
+    framework: "Vitest"
   layers:
     unit:
       available: true
-      tool: "@testing-library/react + Jest"
+      tool: "@testing-library/react + Vitest"
     integration:
       available: false
       tool: "—"
@@ -49,14 +49,14 @@ testing:
       tool: "—"
   coverage:
     available: true
-    command: "npm test -- --coverage --watchAll=false"
+    command: "npm run test -- --coverage"
   quality:
     linter:
       available: true
-      command: "npx standard"
+      command: "npx eslint"
     type_checker:
       available: false
       command: "—"
     formatter:
       available: true
-      command: "npx standard --fix"
+      command: "npx eslint --fix"
