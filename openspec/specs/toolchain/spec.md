@@ -96,8 +96,8 @@ The CI workflow MUST invoke the Vitest test runner.
 | Runtime dependencies | No new runtime dependencies MAY be added to the production bundle. |
 | React 17 | The system MUST continue to use React 17 without version changes. |
 | MUI v4 | The system MUST continue to use Material-UI v4 without migration. |
-| Standard JS | `standard` MUST remain the primary linting rule set. |
-| Node 22 | The system MUST be compatible with Node 22. |
+| Standard JS | StandardJS rules MUST remain the primary linting rule set (via ESLint flat config). |
+| Node 24 | The system MUST be compatible with Node 24. |
 
 ## Constraints
 
