@@ -24,3 +24,4 @@ yarn-error.log*
 
 # .atl, gentleman
 .atl
+audit-report.txt
