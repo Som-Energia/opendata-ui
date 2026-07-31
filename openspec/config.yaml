@@ -1,0 +1,62 @@
+schema: spec-driven
+
+context: |
+  React 17 SPA with Vite 6, Node 24.
+  Material-UI v4 + Emotion styling.
+  JS (no TypeScript). i18next for localization.
+  Vitest + @testing-library/react.
+  ESLint flat config (StandardJS rules) + Prettier.
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include sequence diagrams for complex flows
+    - Document architecture decisions with rationale
+  tasks:
+    - Group by phase, use hierarchical numbering
+    - Keep tasks completable in one session
+  apply:
+    guidelines:
+      - Follow existing code patterns (functional components, hooks)
+    tdd: true
+    test_command: "npm run test"
+  verify:
+    test_command: "npm run test"
+    build_command: "npm run build"
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas
+
+testing:
+  strict_tdd: true
+  detected: 2026-07-30
+  runner:
+    command: "npm run test"
+    framework: "Vitest"
+  layers:
+    unit:
+      available: true
+      tool: "@testing-library/react + Vitest"
+    integration:
+      available: false
+      tool: "—"
+    e2e:
+      available: false
+      tool: "—"
+  coverage:
+    available: true
+    command: "npm run test -- --coverage"
+  quality:
+    linter:
+      available: true
+      command: "npx eslint"
+    type_checker:
+      available: false
+      command: "—"
+    formatter:
+      available: true
+      command: "npx eslint --fix"

@@ -2,6 +2,7 @@
   "name": "opendata-ui",
   "version": "1.0.0",
   "private": false,
+  "type": "module",
   "homepage": "/ui",
   "dependencies": {
     "@date-io/moment": "1.x",
@@ -11,10 +12,9 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@mui/x-date-pickers": "^6.13.0",
-    "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "axios": "^0.21.0",
+    "axios": "^1.19.0",
     "dayjs": "^1.10.4",
     "i18next": "^19.8.3",
     "i18next-browser-languagedetector": "^6.0.1",
@@ -25,20 +25,13 @@
     "react-dom": "^17.0.1",
     "react-i18next": "^11.7.3",
     "react-markdown": "^8.0.7",
-    "react-syntax-highlighter": "^15.4.3",
+    "react-syntax-highlighter": "^16.1.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "start": "vite",
+    "build": "vite build",
+    "test": "vitest"
   },
   "browserslist": {
     "production": [
@@ -53,9 +46,13 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "@vitest/ui": "^3.2.7",
+    "jsdom": "^24.0.0",
     "prettier-config-standard": "^4.0.0",
-    "react-scripts": "^5.0.1",
-    "standard": "^17.1.2"
+    "vite": "^6.4.3",
+    "vitest": "^3.2.7"
   },
   "prettier": "prettier-config-standard"
 }
